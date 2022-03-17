@@ -71,6 +71,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Maven" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/16/Maven/" class="article-date">
+  <time class="dt-published" datetime="2022-03-16T07:13:47.000Z" itemprop="datePublished">2022-03-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/03/16/Maven/">Maven</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>#Maven<br>Maven是什么：<br>项目管理工具，对软件项目提供构建与依赖管理<br>Apache基金会的顶级开源项目<br>为Java项目提供了统一的管理方式，事实上已经成为业界标准。</p>
+<p>Maven核心特点：<br>项目设置遵循统一的规则，保证不同开发环境的兼容性。<br>强大的依赖管理，项目依赖组件自动下载，自动更新。<br>可扩展的插件机制，使用简单，功能丰富。</p>
+<p>配置一下环境变量。。。<br>在idea的设置里面更改一下maven版本</p>
+<p>Maven依赖管理：<br>依赖坐标系：<br>GroupId：机构或团体的英文，采用“逆向域名”形式书写<br>AritifactId：项目名称，说明其用途。例如：cms，oa<br>Version：版本号，一般为“版本+单词”的形式。<br>重要！！！maven的搜索界面：search.maven.org<br>直接上maven的搜索界面进行搜索下载。先复制其坐标系，在回到pom.xml文件创建<dependencies>,所有的引用都放在这里面，然后右上角更新，下载库。<br>阿里云镜像仓库，解决国外网速问题，网址：maven.aliyun.com在xml文件里使用<repositories>标签引用，这样一来，在下载文件时，优先从相应的镜像仓库里面查找。找不到再从远端查找<br>几乎每份文件都需要。<br><repositories><br> <repositorie><br>  <id>aliyun</id><br>  <name>aliyun</name><br>  <url>在阿里云的网址找相应的部分</url><br> </repositorie><br></repositories><br>.m2文件里保存了下载的文件，lastupdate是在下载失败时产生的，可以删除。<br>依赖也有依赖，存在pom文件里</p>
+<p>maven生命周期：执行某个命令时会将前面的命令一起执行了<br>mvn + …<br>validate 验证项目是否正确且所有必须信息是可用的<br>compile 源代码编译阶段<br>test 运行test目录下的测试代码验证src下源代码的逻辑<br>package 生成产出物jar，war文件<br>verify 运行任意的检查来验证项目包有效且达到质量标准<br>install 安装打包的项目到本地仓库，以供其它项目使用<br>deploy 拷贝最终的工程包到远程仓库中，以共享给其它开发人员和工程。</p>
+<p>maven插件技术：<br>提供功能扩展的能力<br>maven-assembly-plugin是maven打包插件，用于构建FatJar。<br>所谓FatJar是指将所有依赖包装为独立可运行的Jar<br>插件配置：在pom中使用<build>标签进行设置<br>    <build><br>        <plugins><br>            <plugin><br>                <groupId>org.apache.maven.plugins</groupId><br>                <artifactId>maven-assembly-plugin</artifactId><br>                <version>2.5.5</version><br>                <configuration><br>                    <archive><br>                        <manifest><br>                            <mainClass>com.imooc.maven.jdbc.JdbcSample</mainClass><br>                        </manifest><br>                    </archive><br>                    <descriptorRefs><br>                        <!-- all in one , 在打包时会将所有引用的jar合并到输出的jar文件中 --><br>                        <descriptorRef>jar-with-dependencies</descriptorRef><br>                    </descriptorRefs><br>                </configuration><br>            </plugin><br>        </plugins><br>    </build><br>插件仓库：<br>    <pluginRepositories><br>        <pluginRepository><br>            <id>aliyun</id><br>            <name>aliyun</name><br>            <url><a target="_blank" rel="noopener" href="https://maven.aliyun.com/repository/public">https://maven.aliyun.com/repository/public</a></url><br>        </pluginRepository><br>    </pluginRepositories></p>
+<p>pom的内容说明：<br>&lt;!第一行是固定的xml版本号及UTF-8&gt;<br><?xml version="1.0" encoding="UTF-8"?><br>&lt;!根节点<projecj>&gt;<br><project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"><br>&lt;!工程版本说明，使用3.x版本的maven工程统一要求使用4.0.0&gt;<br>    <modelVersion>4.0.0</modelVersion><br>&lt;!当前工程坐标系，用于发布时的存储和定位&gt;<br>    <groupId>com.imooc</groupId><br>    <artifactId>maven-first</artifactId><br>    <version>1.0.0-RELEASE</version><br>&lt;!属性&gt;<br>    <properties><br>        &lt;project.build.sourceEncoding&gt;UTF-8&lt;&#x2F;project.build.sourceEncoding&gt;<br>        &lt;maven.compiler.source&gt;8&lt;&#x2F;maven.compiler.source&gt;<br>        &lt;maven.compiler.target&gt;8&lt;&#x2F;maven.compiler.target&gt;<br>        &lt;!作为引用改变版本号&gt;<br>        &lt;pinyin4j.version&gt;2.5.1&lt;&#x2F;pinyin4j.version&gt;<br>        &lt;spring.version&gt;5.2.5.RELEASE&lt;&#x2F;spring.version&gt;<br>        &lt;mysql.jdbc.version&gt;8.0.23&lt;&#x2F;mysql.jdbc.version&gt;<br>    </properties><br>&lt;!阿里云maven镜像仓库&gt;<br>    <!--阿里云Maven镜像--><br>    <repositories><br>        <repository><br>            <id>aliyun</id><br>            <name>aliyun</name><br>            <url><a target="_blank" rel="noopener" href="https://maven.aliyun.com/repository/public">https://maven.aliyun.com/repository/public</a></url><br>        </repository><br>    </repositories><br>&lt;!阿里云maven插件镜像仓库&gt;<br>    <pluginRepositories><br>        <pluginRepository><br>            <id>aliyun</id><br>            <name>aliyun</name><br>            <url><a target="_blank" rel="noopener" href="https://maven.aliyun.com/repository/public">https://maven.aliyun.com/repository/public</a></url><br>        </pluginRepository><br>    </pluginRepositories><br>&lt;!插件&gt;<br>    <dependencies><br>        <!--pinyin4j--><br>        <dependency><br>            <groupId>com.belerweb</groupId><br>            <artifactId>pinyin4j</artifactId><br>            <version>${pinyin4j.version}</version><br>            <!--            <version>2.5.0</version>--><br>        </dependency><br>        <dependency><br>            <groupId>org.springframework</groupId><br>            <artifactId>spring-context</artifactId><br>            <version>5.2.5.RELEASE</version><br>            <!--            <version>5.2.5.RELEASE</version>--><br>        </dependency><br>        <dependency><br>            <groupId>mysql</groupId><br>            <artifactId>mysql-connector-java</artifactId><br>            <version>${mysql.jdbc.version}</version><br>            <!--            <version>8.0.24</version>--><br>        </dependency><br>    </dependencies><br>&lt;!c插件相关的设置选项&gt;<br>    <build><br>        <plugins><br>            <plugin><br>                <groupId>org.apache.maven.plugins</groupId><br>                <artifactId>maven-assembly-plugin</artifactId><br>                <version>2.5.5</version><br>                <configuration><br>                    <archive><br>                        <manifest><br>                            <mainClass>com.imooc.maven.jdbc.JdbcSample</mainClass><br>                        </manifest><br>                    </archive><br>                    <descriptorRefs><br>                        <!-- all in one , 在打包时会将所有引用的jar合并到输出的jar文件中 --><br>                        <descriptorRef>jar-with-dependencies</descriptorRef><br>                    </descriptorRefs><br>                </configuration><br>            </plugin><br>        </plugins><br>    </build><br></project><br>最后在右侧的maven里plugins内双击assembly：assembly命令生成FatJar文件。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/16/Maven/" data-id="cl0urfe1q0000lwug85dk7g6i" data-title="Maven" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-基于人类意图识别的虚拟现实机器人辅助焊接" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/03/16/%E5%9F%BA%E4%BA%8E%E4%BA%BA%E7%B1%BB%E6%84%8F%E5%9B%BE%E8%AF%86%E5%88%AB%E7%9A%84%E8%99%9A%E6%8B%9F%E7%8E%B0%E5%AE%9E%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BE%85%E5%8A%A9%E7%84%8A%E6%8E%A5/" class="article-date">
@@ -298,6 +345,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2022/03/16/Maven/">Maven</a>
+          </li>
         
           <li>
             <a href="/2022/03/16/%E5%9F%BA%E4%BA%8E%E4%BA%BA%E7%B1%BB%E6%84%8F%E5%9B%BE%E8%AF%86%E5%88%AB%E7%9A%84%E8%99%9A%E6%8B%9F%E7%8E%B0%E5%AE%9E%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BE%85%E5%8A%A9%E7%84%8A%E6%8E%A5/">基于人类意图识别的虚拟现实机器人辅助焊接</a>
