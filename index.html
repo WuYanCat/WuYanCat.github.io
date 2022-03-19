@@ -71,6 +71,46 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Java-Reflect" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/18/Java-Reflect/" class="article-date">
+  <time class="dt-published" datetime="2022-03-18T00:41:32.000Z" itemprop="datePublished">2022-03-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/03/18/Java-Reflect/">Java-Reflect</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>#反射<br>1.什么是反射？<br>反射是在运行时动态访问类与对象的技术<br>在JDK1.2版本之后的高级技术，隶属于java.lang.reflect<br>大多数java框架都基于反射实现参数配置，动态注入等特性<br>2.反射的四个核心类<br>Class类<br>    在JVM中代表类和接口的类<br>    Class对象包含了某个特定类的结构信息<br>    通过Class对象可以获得对应类的构造方法&#x2F;方法&#x2F;成员变量<br>    核心方法：（classObj代表某个具体的Class对象）<br>        Class.forName()静态方法，获取指定党的Class对象<br>        classObj.newinstance()通过默认的构造方法创建新的对象<br>        classObj.getConstructor()获得指定的由public修饰的（默认）构造方法Constructor对象,返回Object类<br>        classObj.getMethod()获得指定的由public修饰的构造方法Method对象<br>        classObj.getField()获得指定的由public修饰的构造方法Field对象<br>         try {<br>            &#x2F;&#x2F;该方法将指定的类加载到jvm，并返回对应Class对象<br>            Class employeeClass &#x3D; Class.forName(“com.imooc.reflect.entity.Employee”);<br>            System.out.println(“Employee已被加载到JVM中”);<br>            &#x2F;&#x2F;通过默认的构造方法创建新的对象<br>            Employee emp &#x3D; (Employee)employeeClass.newInstance();<br>            System.out.println(emp);<br>        } catch (ClassNotFoundException e) {<br>            &#x2F;&#x2F;类名或路径书写错误，抛出“类无法找到”异常<br>            e.printStackTrace();<br>        } catch (IllegalAccessException e) {<br>            &#x2F;&#x2F;非法访问异常，如private，当在作用域外访问对象方法或成员变量时抛出<br>            e.printStackTrace();<br>        } catch (InstantiationException e) {<br>            &#x2F;&#x2F;实例化异常，当对象无法被实例化时抛出<br>            e.printStackTrace();<br>        }<br>Constructor构造方法类<br>    是对java类中构造方法的抽象<br>    包含了具体类的某个具体构造方法的声明<br>    通过Constructor对象调用带参构造方法创建对象<br>    核心方法：<br>        classObj.getConstrustor()获取指定public修饰的构造方法对象<br>        constructorObj.newInstance()通过对应的构造方法创建对象<br>        try {<br>            Class employeeClass &#x3D; Class.forName(“com.imooc.reflect.entity.Employee”);<br>            Constructor constructor &#x3D; employeeClass.getConstructor(new Class[]{<br>                    Integer.class,String.class,Float.class,String.class<br>            });<br>            Employee employee &#x3D; (Employee)constructor.newInstance(new Object[]{<br>                    100,”李磊”,300f,”研发部”<br>            });<br>            System.out.println(employee);<br>        } catch (ClassNotFoundException e) {<br>            e.printStackTrace();<br>        } catch (NoSuchMethodException e) {<br>            &#x2F;&#x2F;没有找到与之对应格式的方法<br>            e.printStackTrace();<br>        } catch (IllegalAccessException e) {<br>            e.printStackTrace();<br>        } catch (InstantiationException e) {<br>            e.printStackTrace();<br>        } catch (InvocationTargetException e) {<br>            &#x2F;&#x2F;当调用的方法内部出现异常而没有被捕捉到时抛出<br>            e.printStackTrace();<br>        }<br>Method方法类<br>    指代某个类中的方法的描述<br>    使用classobj.getMethod()方法获取Method对象<br>    通过Method对象调用指定对象的对应方法<br>    核心方法：<br>        ClassObj.getMethod()获取指定public修饰党的方法对象<br>        methodObj.invoke()调用指定对象的对应方法<br>        try {<br>            Class employeeClass &#x3D; Class.forName(“com.imooc.reflect.entity.Employee”);<br>            Constructor constructor &#x3D; employeeClass.getConstructor(new Class[]{<br>                    Integer.class,String.class,Float.class,String.class<br>            });<br>            Employee employee &#x3D; (Employee)constructor.newInstance(new Object[]{<br>                    100,”李磊”,300f,”研发部”<br>            });<br>            Method updateSalaryMethod &#x3D; employeeClass.getMethod(“updateSalary”, new Class[]{<br>                    Float.class<br>            });<br>            Employee employee1 &#x3D; (Employee)updateSalaryMethod.invoke(employee,new Object[]{<br>                    1000f<br>            });<br>            System.out.println(employee1);<br>        } catch (ClassNotFoundException e) {<br>            e.printStackTrace();<br>        } catch (NoSuchMethodException e) {<br>            e.printStackTrace();<br>        } catch (IllegalAccessException e) {<br>            e.printStackTrace();<br>        } catch (InstantiationException e) {<br>            e.printStackTrace();<br>        } catch (InvocationTargetException e) {<br>            e.printStackTrace();<br>        }<br>Field成员变量类<br>    Field对应某个具体类中的成员变量的声明<br>    Field对象使用classObj.getField()方法获取<br>    通过Field对象可为某对象成员变量赋值&#x2F;取值<br>    核心方法：<br>        classObj.getField()获取指定public修饰的成员变量对象<br>        fieldObj.set()为某个指定成员变量赋值<br>        fieldObj.get()获取某对象指定成员变量数值<br>        try {<br>            Class employeeClass &#x3D; Class.forName(“com.imooc.reflect.entity.Employee”);<br>            Constructor constructor &#x3D; employeeClass.getConstructor(new Class[]{<br>                    Integer.class,String.class,Float.class,String.class<br>            });<br>            Employee employee &#x3D; (Employee)constructor.newInstance(new Object[]{<br>                    100,”李磊”,300f,”研发部”<br>            });<br>            Field field &#x3D; employeeClass.getField(“ename”);<br>            field.set(employee,”李雷”);<br>            String s &#x3D; (String)field.get(employee);<br>            System.out.println(“ename “+s);<br>        } catch (ClassNotFoundException e) {<br>            e.printStackTrace();<br>        } catch (NoSuchMethodException e) {<br>            e.printStackTrace();<br>        } catch (InstantiationException e) {<br>            e.printStackTrace();<br>        } catch (IllegalAccessException e) {<br>            e.printStackTrace();<br>        } catch (InvocationTargetException e) {<br>            e.printStackTrace();<br>        } catch (NoSuchFieldException e) {<br>            e.printStackTrace();<br>        }<br>    getDeclared系列方法：<br>        getDeclaredConstructor(s)|Method(s)|Field(s)获取对应对象<br>        而getConstructor(s)|Method(s)|Field(s)只能获取public对象<br>        当访问非作用域内的构造方法，方法，成员变量时，会抛出异常<br>        try {<br>            Class employeeClass &#x3D; Class.forName(“com.imooc.reflect.entity.Employee”);<br>            Constructor constructor &#x3D; employeeClass.getConstructor(new Class[]{<br>                    Integer.class,String.class,Float.class,String.class<br>            });<br>            Employee employee &#x3D; (Employee)constructor.newInstance(new Object[]{<br>                    100,”李磊”,300f,”研发部”<br>            });<br>            Field[] fields &#x3D; employeeClass.getDeclaredFields();<br>            for(Field field:fields){<br>                System.out.println(field.getName());<br>                if(field.getModifiers() &#x3D;&#x3D; 1){&#x2F;&#x2F;public修饰<br>                    Object val &#x3D;field.get(employee);<br>                    System.out.println(field.getName()+”:”+val);<br>                }else if(field.getModifiers() &#x3D;&#x3D; 2){&#x2F;&#x2F;private修饰<br>                    String methodName &#x3D; “get”+field.getName().substring(0,1).toUpperCase()<br>                            +field.getName().substring(1);<br>                    Method getMethod &#x3D; employeeClass.getMethod((methodName));<br>                    Object obj &#x3D; getMethod.invoke(employee);<br>                    System.out.println(field.getName()+”:”+obj);<br>                }<br>            }<br>        } catch (ClassNotFoundException e) {<br>            e.printStackTrace();<br>        } catch (NoSuchMethodException e) {<br>            e.printStackTrace();<br>        } catch (InstantiationException e) {<br>            e.printStackTrace();<br>        } catch (IllegalAccessException e) {<br>            e.printStackTrace();<br>        } catch (InvocationTargetException e) {<br>            e.printStackTrace();<br>        }<br>反射的应用<br>I18N国际化<br>执行类<br>public static void say(){<br>        Properties properties &#x3D; new Properties();<br>        String  configPath &#x3D; Application.class.getResource(“&#x2F;config.properties”).getPath();<br>        try {<br>            configPath &#x3D; new URLDecoder().decode(configPath,”UTF-8”);<br>            properties.load(new FileInputStream(configPath));<br>            String language &#x3D; properties.getProperty(“language”);<br>            I18N i18N &#x3D; (I18N)Class.forName(language).newInstance();<br>            System.out.println(<br>                    i18N.say()<br>            );<br>        } catch (Exception e) {<br>            e.printStackTrace();<br>        }<br>}</p>
+<p>public static void main(String[] args) {<br>        Application.say();<br>}<br>配置文件：<br>language&#x3D;com.imooc.reflect.i18n.En<br>接口：<br>public interface I18N {<br>    public String say();<br>}<br>之后通过几个语言类Zhcn，En等实现接口即可<br>Zhcn类<br>public class Zhcn implements I18N{<br>    @Override<br>    public String say() {<br>        return “生命不息奋斗不止”;<br>    }<br>}<br>En类<br>public class En implements I18N{<br>    @Override<br>    public String say() {<br>        return “adasdjakdasdak”;<br>    }<br>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/18/Java-Reflect/" data-id="cl0x5desx0000vougawxk39bx" data-title="Java-Reflect" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-工厂模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/03/17/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" class="article-date">
@@ -386,6 +426,10 @@
       <ul>
         
           <li>
+            <a href="/2022/03/18/Java-Reflect/">Java-Reflect</a>
+          </li>
+        
+          <li>
             <a href="/2022/03/17/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">工厂模式</a>
           </li>
         
@@ -399,10 +443,6 @@
         
           <li>
             <a href="/2022/03/14/%E7%AC%AC%E4%B8%80%E6%AC%A1/">第一次</a>
-          </li>
-        
-          <li>
-            <a href="/2022/03/14/%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95/">第一次测试</a>
           </li>
         
       </ul>
