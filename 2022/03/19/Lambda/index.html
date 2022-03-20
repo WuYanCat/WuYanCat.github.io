@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Lambda | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="#Lambda表达式1.什么是Lambda表达式JDK8开始支持，用来让程序编写更优雅可以更简洁的实现匿名内部类与函数声明与调用基于Lambda提供的stream流式处理极大的简化对集合的操作2.语法格式(参数列表)-&gt;实现语句参数列表可以使用逗号分隔，参数类型可以省略，单参数括号可以省略实现语句如果是单行可以直接写，多行则用{}包裹public interface MathOperatio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lambda">
+<meta property="og:url" content="http://example.com/2022/03/19/Lambda/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="#Lambda表达式1.什么是Lambda表达式JDK8开始支持，用来让程序编写更优雅可以更简洁的实现匿名内部类与函数声明与调用基于Lambda提供的stream流式处理极大的简化对集合的操作2.语法格式(参数列表)-&gt;实现语句参数列表可以使用逗号分隔，参数类型可以省略，单参数括号可以省略实现语句如果是单行可以直接写，多行则用{}包裹public interface MathOperatio">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-19T01:04:58.000Z">
+<meta property="article:modified_time" content="2022-03-20T09:19:01.964Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Lambda" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/19/Lambda/" class="article-date">
+  <time class="dt-published" datetime="2022-03-19T01:04:58.000Z" itemprop="datePublished">2022-03-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Lambda
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>#Lambda表达式<br>1.什么是Lambda表达式<br>JDK8开始支持，用来让程序编写更优雅<br>可以更简洁的实现匿名内部类与函数声明与调用<br>基于Lambda提供的stream流式处理极大的简化对集合的操作<br>2.语法格式<br>(参数列表)-&gt;实现语句<br>参数列表可以使用逗号分隔，参数类型可以省略，单参数括号可以省略<br>实现语句如果是单行可以直接写，多行则用{}包裹<br>public interface MathOperation {<br>    public Float operate(Integer a,Integer b);<br>}</p>
+<p>public class LambdaSample {<br>    public static void main(String[] args) {<br>        &#x2F;&#x2F;1.标准lambda使用方式<br>        &#x2F;&#x2F;约束条件，接口只有一个抽象方法，也被成为函数式接口<br>        MathOperation addition &#x3D; (Integer a,Integer b)-&gt;{<br>            System.out.println(“加法”);<br>            return a+b+0f;<br>        };<br>        System.out.println(addition.operate(5,3));<br>        &#x2F;&#x2F;2.Lambda允许忽略参数类型<br>        MathOperation substraction &#x3D; (a,b)-&gt;{<br>            return a-b+0f;<br>        };<br>        System.out.println(substraction.operate(5,3));<br>        &#x2F;&#x2F;3.单行实现代码可以省略大括号和return<br>        MathOperation multiplication &#x3D; (a,b)-&gt;a*b+0f;<br>        System.out.println(multiplication.operate(5,3));<br>        &#x2F;&#x2F;4.若只有一个参数，则小括号都可以省略<br>    }<br>}<br>3.函数式编程<br> 什么是函数式编程<br> 基于函数式接口并使用Lambda表达的编程方式<br> 函数式编程理念式将代码作为可重用数据带入到程序运行中<br> 函数式编程强调“你想做什么”，而不是“你想怎么做”。<br> 函数式接口：有且只有一个抽象方法的接口<br> Predicate：位于java.util.function<br>            用于测试传入的数据是否满足判断要求<br>            该接口需要实现test()方法进行逻辑判断<br>public class PredicateSample {<br>public static void main(String[] args) {<br>    Predicate<Integer> predicate &#x3D; n-&gt;n&gt;4;<br>    boolean result &#x3D; predicate.test(10);<br>    System.out.println(result);<br>    List<Integer> list &#x3D; Arrays.asList(1,2,3,4,5,6,7,8,9,10);<br>    filter(list,n-&gt;n%2&#x3D;&#x3D;1);<br>}</p>
+<p>public static void filter(List<Integer> list,Predicate<Integer> predicate){<br>        for(Integer num:list){<br>            if(predicate.test(num)){<br>                System.out.print(num+”  “);<br>            }<br>        }<br>    }<br>}<br>4.java.util.function包内的函数式接口：<br>Consumer对应有一个输入参数无输出的功能代码，1个泛型<br>Function对应有一个输入参数且需要返回数据的功能代码，2个泛型<br>public static void main(String[] args) {<br>        Function&lt;Integer,String&gt; function &#x3D; l-&gt;{<br>            String chars &#x3D; “abcdefghijklmnopqrstuvwxyz0123456789”;<br>            StringBuffer stringBuffer &#x3D; new StringBuffer();<br>            Random random &#x3D; new Random();<br>            for(int i &#x3D; 0;i&lt;l;i++){<br>                stringBuffer.append(chars.charAt(random.nextInt(chars.length())));<br>            }<br>            return stringBuffer.toString();<br>        };<br>        System.out.println(function.apply(16));&#x2F;&#x2F;生成长度为16的随机字符串。<br>    }</p>
+<p>Predicate用于条件判断，固定返回布尔值<br>加入需要多个输入，只能自己写<br>特殊注解：FunctionalInterface用于通知JDK这是一个函数式接口，自动进行抽象方法检查<br>5.Stream流<br>Stream流式处理是建立在lambda基础上的多数据处理技术<br>对集合数据处理进行高度抽象，极大简化代码量<br>可对集合数据进行迭代，去重，筛选，排序，聚合等一系列处理<br>常用方法：<br>forEach循环遍历<br>map用于映射每个元素到相应的结果<br>filter通过相应的条件筛选元素<br>limit获取指定数量的流<br>sorted对流进行排序<br>Collectors将流转换成集合和聚合元素<br>五种创建方式：前两种为主要创建方式，后三种使用较少<br>&#x2F;&#x2F;1.基于数组创建stream流式处理<br>    @Test<br>    public void generator1(){<br>        String[] arr &#x3D; {“Lily”,”Mike”,”Rose”,”Jason”};<br>        Stream<String> stream &#x3D; Stream.of(arr);<br>        stream.forEach(s-&gt; System.out.println(s));<br>    }<br>    &#x2F;&#x2F;2.基于集合创建<br>    @Test<br>    public void generator2(){<br>        List<String> list &#x3D; new ArrayList();<br>        list.add(“Lily”);<br>        list.add(“Mike”);<br>        list.add(“Rose”);<br>        list.add(“Jason”);<br>        Stream stream &#x3D; list.stream();<br>        stream.forEach(s-&gt; System.out.println(s));<br>    }<br>    &#x2F;&#x2F;3.利用generate方法创建无限长度流<br>    @Test<br>    public void generator3(){<br>        Stream<Integer> stream &#x3D; Stream.generate(() -&gt; new Random().nextInt(100000));<br>        stream.limit(10).forEach(i-&gt;System.out.println(i));<br>    }</p>
+<pre><code>//4.基于迭代器创建流
+@Test
+public void generator4()&#123;
+    Stream&lt;Integer&gt; stream = Stream.iterate(1,n-&gt;n+1);
+    stream.limit(100).forEach(i-&gt;System.out.println(i));
+&#125;
+//5.基于字符序列创建流
+@Test
+public void generator5()&#123;
+    String str = &quot;abcdefg我的&quot;;
+    IntStream stream = str.chars();
+    stream.forEach(c -&gt; System.out.println((char)c));
+&#125;
+</code></pre>
+<p>Stream中各种方法的使用<br>&#x2F;&#x2F;提取数组中的所有偶数并求和<br>    @Test<br>    public void case1(){<br>        List<String> list &#x3D; Arrays.asList(“1”,”2”,”3”,”4”,”5”,”6”);<br>        int sum &#x3D; list.stream()&#x2F;&#x2F;获取Stream对象<br>            .mapToInt(s-&gt;Integer.parseInt(s))&#x2F;&#x2F;转为int<br>                .filter(n-&gt;n%2&#x3D;&#x3D;0)&#x2F;&#x2F;对数据进行过滤<br>                .sum();&#x2F;&#x2F;求和<br>        System.out.println(sum);<br>    }<br>    &#x2F;&#x2F;所有名字的首字母大写<br>    @Test<br>    public void case2(){<br>        List<String> list &#x3D; Arrays.asList(“lily”,”mike”,”jason”,”rose”);<br>        &#x2F;&#x2F;map方法对每个数据进行相应的处理，结果仍保存在流中<br>        List newlist &#x3D; list.stream().map(s -&gt; s.substring(0,1).toUpperCase()+s.substring(1))<br>        &#x2F;&#x2F;  .forEach(s -&gt; System.out.println(s));&#x2F;&#x2F;可以输出每个改变后的元素<br>        &#x2F;&#x2F; collectF方将流中元素收集形成新的list&#x2F;set（去除重复数据）<br>            .collect(Collectors.toList());<br>        System.out.println(newlist);<br>    }<br>    &#x2F;&#x2F;将所有奇数筛选出来且从大到小排列且去重<br>    @Test<br>    public void case3(){<br>        List<Integer> list &#x3D; Arrays.asList(1,25,63,25,75,88,94,15,64,55);<br>        List newlist &#x3D; list.stream()<br>                .distinct()&#x2F;&#x2F;去重<br>                .filter(n-&gt;n%2&#x3D;&#x3D;1)&#x2F;&#x2F;过滤<br>                .sorted((a,b)-&gt;b-a)&#x2F;&#x2F;排序<br>                .collect(Collectors.toList());<br>        System.out.println(newlist);<br>    }</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/19/Lambda/" data-id="cl0z2ioiz00008gugfexudd9w" data-title="Lambda" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/03/18/Java-Reflect/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java-Reflect</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95hexo%E5%86%99%E5%8D%9A%E5%AE%A2/" rel="tag">测试hexo写博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%AC%E4%B8%80%E6%AC%A1%E9%9A%8F%E4%BE%BF%E5%86%99%E7%82%B9%E4%B8%9C%E8%A5%BF/" rel="tag">第一次随便写点东西</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%B5%8B%E8%AF%95hexo%E5%86%99%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">测试hexo写博客</a> <a href="/tags/%E7%AC%AC%E4%B8%80%E6%AC%A1%E9%9A%8F%E4%BE%BF%E5%86%99%E7%82%B9%E4%B8%9C%E8%A5%BF/" style="font-size: 10px;">第一次随便写点东西</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/03/19/Lambda/">Lambda</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/18/Java-Reflect/">Java-Reflect</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/17/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">工厂模式</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/16/Maven/">Maven</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/16/%E5%9F%BA%E4%BA%8E%E4%BA%BA%E7%B1%BB%E6%84%8F%E5%9B%BE%E8%AF%86%E5%88%AB%E7%9A%84%E8%99%9A%E6%8B%9F%E7%8E%B0%E5%AE%9E%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BE%85%E5%8A%A9%E7%84%8A%E6%8E%A5/">基于人类意图识别的虚拟现实机器人辅助焊接</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
