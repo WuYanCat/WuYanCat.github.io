@@ -14,7 +14,7 @@
 <meta property="og:description" content="#Lambda表达式1.什么是Lambda表达式JDK8开始支持，用来让程序编写更优雅可以更简洁的实现匿名内部类与函数声明与调用基于Lambda提供的stream流式处理极大的简化对集合的操作2.语法格式(参数列表)-&gt;实现语句参数列表可以使用逗号分隔，参数类型可以省略，单参数括号可以省略实现语句如果是单行可以直接写，多行则用{}包裹 public interface MathOperati">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-19T01:04:58.000Z">
-<meta property="article:modified_time" content="2022-03-20T11:51:52.337Z">
+<meta property="article:modified_time" content="2022-03-21T01:15:05.546Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -96,12 +96,63 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <p>#Lambda表达式<br>1.什么是Lambda表达式<br>JDK8开始支持，用来让程序编写更优雅<br>可以更简洁的实现匿名内部类与函数声明与调用<br>基于Lambda提供的stream流式处理极大的简化对集合的操作<br>2.语法格式<br>(参数列表)-&gt;实现语句<br>参数列表可以使用逗号分隔，参数类型可以省略，单参数括号可以省略<br>实现语句如果是单行可以直接写，多行则用{}包裹</p>
-<p>public interface MathOperation {<br>    public Float operate(Integer a,Integer b);<br>}<br>public class LambdaSample {<br>    public static void main(String[] args) {<br>        &#x2F;&#x2F;1.标准lambda使用方式<br>        &#x2F;&#x2F;约束条件，接口只有一个抽象方法，也被成为函数式接口<br>        MathOperation addition &#x3D; (Integer a,Integer b)-&gt;{<br>            System.out.println(“加法”);<br>            return a+b+0f;<br>        };<br>        System.out.println(addition.operate(5,3));<br>        &#x2F;&#x2F;2.Lambda允许忽略参数类型<br>        MathOperation substraction &#x3D; (a,b)-&gt;{<br>            return a-b+0f;<br>        };<br>        System.out.println(substraction.operate(5,3));<br>        &#x2F;&#x2F;3.单行实现代码可以省略大括号和return<br>        MathOperation multiplication &#x3D; (a,b)-&gt;a*b+0f;<br>        System.out.println(multiplication.operate(5,3));<br>        &#x2F;&#x2F;4.若只有一个参数，则小括号都可以省略<br>    }<br>}</p>
+<pre><code>public interface MathOperation &#123;
+public Float operate(Integer a,Integer b);
+&#125;
+public class LambdaSample &#123;
+public static void main(String[] args) &#123;
+    //1.标准lambda使用方式
+    //约束条件，接口只有一个抽象方法，也被成为函数式接口
+    MathOperation addition = (Integer a,Integer b)-&gt;&#123;
+        System.out.println(&quot;加法&quot;);
+        return a+b+0f;
+    &#125;;
+    System.out.println(addition.operate(5,3));
+    //2.Lambda允许忽略参数类型
+    MathOperation substraction = (a,b)-&gt;&#123;
+        return a-b+0f;
+        &#125;;
+    System.out.println(substraction.operate(5,3));
+    //3.单行实现代码可以省略大括号和return
+    MathOperation multiplication = (a,b)-&gt;a*b+0f;
+    System.out.println(multiplication.operate(5,3));
+    //4.若只有一个参数，则小括号都可以省略
+    &#125;
+&#125;
+</code></pre>
 <p>3.函数式编程<br> 什么是函数式编程<br> 基于函数式接口并使用Lambda表达的编程方式<br> 函数式编程理念式将代码作为可重用数据带入到程序运行中<br> 函数式编程强调“你想做什么”，而不是“你想怎么做”。<br> 函数式接口：有且只有一个抽象方法的接口<br> Predicate：位于java.util.function<br>            用于测试传入的数据是否满足判断要求<br>            该接口需要实现test()方法进行逻辑判断</p>
-<p>public class PredicateSample {<br>public static void main(String[] args) {<br>    Predicate<Integer> predicate &#x3D; n-&gt;n&gt;4;<br>    boolean result &#x3D; predicate.test(10);<br>    System.out.println(result);<br>    List<Integer> list &#x3D; Arrays.asList(1,2,3,4,5,6,7,8,9,10);<br>    filter(list,n-&gt;n%2&#x3D;&#x3D;1);<br>}</p>
-<p>public static void filter(List<Integer> list,Predicate<Integer> predicate){<br>        for(Integer num:list){<br>            if(predicate.test(num)){<br>                System.out.print(num+”  “);<br>            }<br>        }<br>    }<br>}</p>
+<pre><code>public class PredicateSample &#123;
+public static void main(String[] args) &#123;
+    Predicate&lt;Integer&gt; predicate = n-&gt;n&gt;4;
+    boolean result = predicate.test(10);
+    System.out.println(result);
+    List&lt;Integer&gt; list = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+    filter(list,n-&gt;n%2==1);
+&#125;
+
+public static void filter(List&lt;Integer&gt; list,Predicate&lt;Integer&gt; predicate)&#123;
+    for(Integer num:list)&#123;
+        if(predicate.test(num))&#123;
+            System.out.print(num+&quot;  &quot;);
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
 <p>4.java.util.function包内的函数式接口：<br>Consumer对应有一个输入参数无输出的功能代码，1个泛型<br>Function对应有一个输入参数且需要返回数据的功能代码，2个泛型</p>
-<p>public static void main(String[] args) {<br>        Function&lt;Integer,String&gt; function &#x3D; l-&gt;{<br>            String chars &#x3D; “abcdefghijklmnopqrstuvwxyz0123456789”;<br>            StringBuffer stringBuffer &#x3D; new StringBuffer();<br>            Random random &#x3D; new Random();<br>            for(int i &#x3D; 0;i&lt;l;i++){<br>                stringBuffer.append(chars.charAt(random.nextInt(chars.length())));<br>            }<br>            return stringBuffer.toString();<br>        };<br>        System.out.println(function.apply(16));&#x2F;&#x2F;生成长度为16的随机字符串。<br>    }</p>
+<pre><code>public static void main(String[] args) &#123;
+    Function&lt;Integer,String&gt; function = l-&gt;&#123;
+        String chars = &quot;abcdefghijklmnopqrstuvwxyz0123456789&quot;;
+        StringBuffer stringBuffer = new StringBuffer();
+        Random random = new Random();
+        for(int i = 0;i&lt;l;i++)&#123;
+            stringBuffer.append(chars.charAt(random.nextInt(chars.length())));
+        &#125;
+        return stringBuffer.toString();
+    &#125;;
+    System.out.println(function.apply(16));//生成长度为16的随机字符串。
+&#125;
+</code></pre>
 <p>Predicate用于条件判断，固定返回布尔值<br>加入需要多个输入，只能自己写<br>特殊注解：FunctionalInterface用于通知JDK这是一个函数式接口，自动进行抽象方法检查<br>5.Stream流<br>Stream流式处理是建立在lambda基础上的多数据处理技术<br>对集合数据处理进行高度抽象，极大简化代码量<br>可对集合数据进行迭代，去重，筛选，排序，聚合等一系列处理<br>常用方法：<br>forEach循环遍历<br>map用于映射每个元素到相应的结果<br>filter通过相应的条件筛选元素<br>limit获取指定数量的流<br>sorted对流进行排序<br>Collectors将流转换成集合和聚合元素<br>五种创建方式：前两种为主要创建方式，后三种使用较少</p>
 <pre><code>//1.基于数组创建stream流式处理
 @Test
