@@ -71,6 +71,408 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-单元测试与JUnit4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/21/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%8EJUnit4/" class="article-date">
+  <time class="dt-published" datetime="2022-03-21T06:22:23.000Z" itemprop="datePublished">2022-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/03/21/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%8EJUnit4/">单元测试与JUnit4</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>#单元测试<br>单元测试是指对软件中的最小可测试单元进行检查和验证<br>测试用例是指编写一段代码对已有功能（方法）进行校验<br>JUnit 4是java中最著名的单元测试工具，主流IDE内置支持<br>JUnit 4使用：<br>引入jar包或Maven依赖<br>    1.引入jar包<br>    2.用maven依赖<br>    <dependencies><br>        <dependency><br>            <groupId>junit</groupId><br>            <artifactId>junit</artifactId><br>            <version>4.12</version><br>        </dependency><br>    </dependencies><br>编写测试用例验证目标方法是否正确运行<br>在测试用例上增加@Test注解开始单元测试,测试用例在test包里运行，对和×与结果是否正确并不完全相对于<br>可以用generate快速生成</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/21/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%8EJUnit4/" data-id="cl11so3bw000144ugcgmshm87" data-title="单元测试与JUnit4" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-MyBatis" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/21/MyBatis/" class="article-date">
+  <time class="dt-published" datetime="2022-03-21T01:51:08.000Z" itemprop="datePublished">2022-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/03/21/MyBatis/">MyBatis</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>#MyBatis<br>基础部分</p>
+<ol>
+<li>框架</li>
+</ol>
+<p>1.1 框架是什么<br>框架可被应用开发者定制的应用骨架<br>框架是一种规则，保证开发者遵循相同的方式开发程序<br>框架提倡“不要重复造轮子“，对基础功能进行封装<br>1.2 框架的优点<br>极大提高了开发效率<br>统一的编码规则，利于团队管理<br>灵活配置的应用，拥有更好的维护性<br>1.3 SSM开发框架<br>Spring底层管理，框架的框架<br>Spring MVC管理web<br>Mybatis数据库操作<br>2. MyBatis<br>2.1 什么是MyBatis<br>优秀的持久层框架<br>使用XML将SQL与程序解耦，便于维护<br>学习简单，执行高效，是JDBC的延申。<br>2.2 Mybatis开发流程<br>引入MyBatis依赖<br>创建核心配置文件<br>创建实体（Entity）类<br>创建Mapper映射文件<br>初始化SessionFactory<br>利用SqlSssion对象操作数据<br>2.3 MyBatis环境配置<br>MyBatis采用XML格式配置数据库环境信息<br>MyBatis环境配置标签《environment》<br>environment包含数据库驱动，URL，用户名与密码<br>详见mybatis-config。xml文件<br>2.3 SqlSessionFactory<br>是MyBatis的核心对象<br>用于初始化MyBatis,创建SqlSession对象<br>需要保证在应用中全局唯一<br>2.4 SqlSession<br>是MyBatis操作数据库的核心对象<br>使用JDBC方式和数据库交互<br>该对象提供了数据表CRUD对应方法</p>
+<pre><code>//JUNIT单元测试类
+public class MyBatisTestor &#123;
+/**
+ * 初始化SqlSessionFactory
+ * @throws IOException
+ */
+@Test
+public void testSqlSessionFactory() throws IOException &#123;
+    //利用Reader加载classpath下的mybatis-config.xml核心配置文件
+    Reader reader = Resources.getResourceAsReader(&quot;mybatis-config.xml&quot;);
+    //初始化SqlSessionFactory对象,同时解析mybatis-config.xml文件
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+    System.out.println(&quot;SessionFactory加载成功&quot;);
+    SqlSession sqlSession = null;
+    try &#123;
+        //创建SqlSession对象,SqlSession是JDBC的扩展类,用于与数据库交互
+        sqlSession = sqlSessionFactory.openSession();
+        //创建数据库连接(测试用)
+        Connection connection = sqlSession.getConnection();
+        System.out.println(connection);
+    &#125;catch (Exception e)&#123;
+        e.printStackTrace();
+    &#125;finally &#123;
+        if(sqlSession != null)&#123;
+            //如果type=&quot;POOLED&quot;,代表使用连接池,close则是将连接回收到连接池中
+            //如果type=&quot;UNPOOLED&quot;,代表直连,close则会调用Connection.close()方法关闭连接
+            sqlSession.close();
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>2.5 MyBatis数据查询<br>步骤：创建实体类(Entity)<br>    创建Mapper XML<br>    编写《select》sql标签<br>    开启驼峰命名映射<br>    新增mapper<br>    SqlSession执行select语句<br>    1.为保证SqlSessionFactory的全局唯一性，使用MyBatisUtils工具类</p>
+<p>&#x2F;**</p>
+<ul>
+<li>MyBatisUtils工具类，创建全局唯一的SqlSessionFactory对象</li>
+</ul>
+<p> *&#x2F;<br>public class MyBatisUtils {<br>    &#x2F;&#x2F;使用静态static属于类而不属于对象，实现全局唯一<br>    private static SqlSessionFactory sqlSessionFactory&#x3D;null;<br>    static {&#x2F;&#x2F;static块可用于初始化静态对象<br>        Reader reader &#x3D; null;<br>        try {<br>            reader &#x3D; Resources.getResourceAsReader(“mybatis-config.xml”);<br>            sqlSessionFactory &#x3D; new SqlSessionFactoryBuilder().build(reader);<br>        } catch (IOException e) {<br>            e.printStackTrace();<br>            &#x2F;&#x2F;初始化错误时，通过抛出异常通知调用者<br>            throw new ExceptionInInitializerError(e);<br>        }<br>    }</p>
+<pre><code>/**
+ * 创建一个新的SqlSession对象
+ * @return
+ */
+public static SqlSession openSession()&#123;
+    return sqlSessionFactory.openSession();
+&#125;
+
+/**
+ * 关闭SqlSession对象
+ * @param sqlSession
+ */
+public static void closeSession(SqlSession sqlSession)&#123;
+    if(sqlSession!=null)&#123;
+        sqlSession.close();
+    &#125;
+
+&#125;
+</code></pre>
+<p>}</p>
+<pre><code>2.创建实体类entity
+在entity包中添加goods类，包含商品的各种属性和set，get方法
+3.创建mapper xml
+在resources包内新建一个mappers包，其中创建Goods.xml文件，声明相应的语句，并在mybatis-config.xml文件里声明mappers文件
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+</code></pre>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="goods">
+    <select id="selectAll" resultType="com.imooc.mybatis.entity.Goods">
+        select * from t_goods order by goods_id desc limit 10
+    </select>
+</mapper>
+mybatis里声明
+<mappers>
+        <mapper resource="mappers/goods.xml"/>
+    </mappers>
+
+<pre><code>测试：
+
+@Test
+public void testSelectAll()&#123;
+    SqlSession sqlSession = null;
+    try &#123;
+        sqlSession = MyBatisUtils.openSession();
+        List&lt;Goods&gt; list = sqlSession.selectList(&quot;goods.selectAll&quot;);
+        for(Goods g :list) &#123;
+            System.out.println(g.getTitle());
+        &#125;
+    &#125; catch (Exception e) &#123;
+        e.printStackTrace();
+    &#125; finally &#123;
+        MyBatisUtils.closeSession(sqlSession);
+    &#125;
+&#125;
+
+4.开启驼峰命名映射
+
+在mybatis-config.xml内设置
+    &lt;settings&gt;
+    &lt;setting name=&quot;mapUnderscoreToCamelCase&quot; value=&quot;true&quot;/&gt;
+&lt;/settings&gt;
+
+5.数据传参
+在goods.xml内的mapper项内设置
+
+&lt;!--无参数传递--&gt;
+&lt;select id=&quot;selectAll&quot; resultType=&quot;com.imooc.mybatis.entity.Goods&quot;&gt;
+    select * from t_goods order by goods_id desc limit 10
+&lt;/select&gt;
+&lt;!--单参数传递--&gt;
+&lt;select id=&quot;selectById&quot; parameterType=&quot;Integer&quot; resultType=&quot;com.imooc.mybatis.entity.Goods&quot;&gt;
+   select * from t_goods where goods_id = #&#123;value&#125;
+&lt;/select&gt;
+&lt;!--多参数传递，使用Map--&gt;
+&lt;select id=&quot;selectByPriceRange&quot; parameterType=&quot;java.util.Map&quot; resultType=&quot;com.imooc.mybatis.entity.Goods&quot;&gt;
+    select * from t_goods where current_price between #&#123;min&#125; and #&#123;max&#125;
+    order by current_price limit 0,#&#123;limit&#125;
+&lt;/select&gt;
+
+6.多表关联查询结果
+ &lt;!--灵活，易于调整，但容易出错 --&gt;
+    &lt;select id=&quot;selectGoodsMap&quot; resultType=&quot;java.util.LinkedHashMap&quot;&gt;使用LinkedHashiMap保证各字段的顺序不变
+    select g.* ,c.category_name from t_goods g,t_category c
+    where g.category_id = c.category_id
+&lt;/select&gt;
+
+7.结果映射ResultMap
+可以将查询结果映射为复杂类型的java对象
+适用于Java对象保存多表关联结果
+支持对象关联查询等高级特性
+建立一个GoodsDTO类
+</code></pre>
+<p>public class GoodsDTO {<br>    private Goods goods &#x3D; new Goods();<br>    private String categoryName;<br>    private String test;</p>
+<pre><code>public Goods getGoods() &#123;
+    return goods;
+&#125;
+
+public void setGoods(Goods goods) &#123;
+    this.goods = goods;
+&#125;
+
+public String getCategoryName() &#123;
+    return categoryName;
+&#125;
+
+public void setCategoryName(String categoryName) &#123;
+    this.categoryName = categoryName;
+&#125;
+
+public String getTest() &#123;
+    return test;
+&#125;
+
+public void setTest(String test) &#123;
+    this.test = test;
+&#125;
+</code></pre>
+<p>}</p>
+<pre><code>&lt;resultMap id=&quot;rmGoods&quot; type=&quot;com.imooc.mybatis.dto.GoodsDTO&quot;&gt;
+    &lt;!--设置主键字段与属性映射--&gt;
+    &lt;id property=&quot;goods.goodsId&quot; column=&quot;goods_id&quot;&gt;&lt;/id&gt;
+    &lt;!--设置非主键字段与属性映射--&gt;
+    &lt;result property=&quot;goods.title&quot; column=&quot;title&quot;&gt;&lt;/result&gt;
+    &lt;result property=&quot;goods.originalCost&quot; column=&quot;original_cost&quot;&gt;&lt;/result&gt;
+    &lt;result property=&quot;goods.currentPrice&quot; column=&quot;current_price&quot;&gt;&lt;/result&gt;
+    &lt;result property=&quot;goods.discount&quot; column=&quot;discount&quot;&gt;&lt;/result&gt;
+    &lt;result property=&quot;goods.isFreeDelivery&quot; column=&quot;is_free_delivery&quot;&gt;&lt;/result&gt;
+    &lt;result property=&quot;goods.categoryId&quot; column=&quot;category_id&quot;&gt;&lt;/result&gt;
+    &lt;result property=&quot;categoryName&quot; column=&quot;category_name&quot;/&gt;
+    &lt;result property=&quot;test&quot; column=&quot;test&quot;/&gt;
+&lt;/resultMap&gt;
+&lt;select id=&quot;selectGoodsDTO&quot; resultMap=&quot;rmGoods&quot;&gt;
+    select g.* ,c.category_name,&#39;1&#39; as test from t_goods g,t_category c
+    where g.category_id = c.category_id
+&lt;/select&gt;
+</code></pre>
+<p>同样，可以把category也弄成类</p>
+<pre><code>8.数据插入操作
+
+&lt;insert id=&quot;insert&quot; parameterType=&quot;com.imooc.mybatis.entity.Goods&quot;&gt;
+    insert into t_goods (title, sub_title, original_cost, current_price, discount, is_free_delivery, category_id)
+    values (#&#123;title&#125;,#&#123;subTitle&#125;,#&#123;originalCost&#125;,#&#123;currentPrice&#125;,#&#123;discount&#125;,#&#123;isFreeDelivery&#125;,#&#123;categoryId&#125;)
+    &lt;selectKey resultType=&quot;Integer&quot; keyProperty=&quot;goodsId&quot; order=&quot;AFTER&quot;&gt;
+        select last_insert_id()   《sql自带函数》
+    &lt;/selectKey&gt;
+&lt;/insert&gt;
+
+9.selectKey与useGeneratedKeys的区别
+都是在insert标签内使用
+前者为显示获取，后者则根据当前驱动自动获取，隐式获取
+前者适用于所有关系型数据库，后者只适用于支持“自增主键”类型的数据库，如oracle就不行。
+前者适用广，但编写麻烦；后者简单但应用有限。
+
+10.更新与删除操作
+更新时一般先获得原始数据，在原始数据上操作
+
+&lt;update id=&quot;update&quot; parameterType=&quot;com.imooc.mybatis.entity.Goods&quot;&gt;
+    update t_goods
+    set
+    title = #&#123;title&#125;,
+    sub_title = #&#123;subTitle&#125;,
+    original_cost = #&#123;originalCost&#125;,
+    current_price = #&#123;currentPrice&#125;,
+    discount = #&#123;discount&#125;,
+    is_free_delivery = #&#123;isFreeDelivery&#125;,
+    category_id = #&#123;categoryId&#125;
+    where
+    goods_id = #&#123;goodsId&#125;
+&lt;/update&gt;
+
+&lt;delete id=&quot;delete&quot; parameterType=&quot;Integer&quot;&gt;
+    delete from t_goods where goods_id = #&#123;value&#125;
+&lt;/delete&gt;
+
+11.预防sql注入攻击
+MyBatis两种传值方式
+(1)$&#123;&#125;纯文本替换，未经任何处理对sql文本替换
+(2)#&#123;&#125;预编译传值，可以预防sql注入
+但纯文本替换也有一定的使用场景
+
+测试代码完整般
+</code></pre>
+<p>public class MyBatisTestor{<br>    @Test<br>    public void testSqlSessionFactory() throws IOException {<br>        &#x2F;&#x2F;使用Reader加载classpath路径下的mybatis-config.xml核心配置文件<br>        Reader reader &#x3D; Resources.getResourceAsReader(“mybatis-config.xml”);<br>        &#x2F;&#x2F;初始化SqlSessionFactory对象，同时解析mybatis-config.xml文件<br>        SqlSessionFactory sqlSessionFactory &#x3D; new SqlSessionFactoryBuilder().build(reader);<br>        System.out.println(“SessionFactory加载成功”);<br>        SqlSession sqlSession &#x3D; null;<br>        try {<br>            &#x2F;&#x2F;创建Sqlssion对象，该对象是JDBC的扩展类，用于与数据库交互<br>            sqlSession &#x3D; sqlSessionFactory.openSession();<br>            &#x2F;&#x2F;创建数据库连接（测试用）<br>            Connection connection &#x3D; sqlSession.getConnection();<br>            System.out.println(connection);<br>        } catch (Exception e) {<br>            e.printStackTrace();<br>        }finally {<br>            &#x2F;&#x2F;如果type&#x3D;“POOLED”代表使用连接池，close方法将其回收到连接池中<br>            &#x2F;&#x2F;…“UNPOOLED”,代表直连，close则会调用Connection。close（）方法关闭连接<br>            if(sqlSession!&#x3D;null)<br>            sqlSession.close();<br>        }<br>    }<br>    @Test<br>    public void testMyBatisUtils(){<br>        SqlSession sqlSession &#x3D; null;<br>        try {<br>            sqlSession &#x3D; MyBatisUtils.openSession();<br>            Connection connection &#x3D; sqlSession.getConnection();<br>            System.out.println(connection);<br>        } catch (Exception e) {<br>            e.printStackTrace();<br>        } finally {<br>            MyBatisUtils.closeSession(sqlSession);<br>        }<br>    }<br>    @Test<br>    public void testSelectAll(){<br>        SqlSession sqlSession &#x3D; null;<br>        try {<br>            sqlSession &#x3D; MyBatisUtils.openSession();<br>            List<Goods> list &#x3D; sqlSession.selectList(“goods.selectAll”);<br>            for(Goods g :list) {<br>                System.out.println(g.getTitle());<br>            }<br>        } catch (Exception e) {<br>            e.printStackTrace();<br>        } finally {<br>            MyBatisUtils.closeSession(sqlSession);<br>        }<br>    }<br>    @Test<br>    public void testSelectById() throws Exception {<br>        SqlSession sqlSession &#x3D; null;<br>        try {<br>            sqlSession &#x3D; MyBatisUtils.openSession();<br>            Goods goods &#x3D; sqlSession.selectOne(“goods.selectById”,1602);<br>            System.out.println(goods.getTitle());<br>        } catch (Exception e) {<br>            throw e;<br>        } finally {<br>            MyBatisUtils.closeSession(sqlSession);<br>        }<br>    }<br>    @Test<br>    public void testSelectByPriceRange() throws Exception {<br>        SqlSession sqlSession &#x3D; null;<br>        try {<br>            sqlSession &#x3D; MyBatisUtils.openSession();<br>            Map para &#x3D; new HashMap();<br>            para.put(“min”,100);<br>            para.put(“max”,500);<br>            para.put(“limit”,10);<br>            List<Goods> list &#x3D; sqlSession.selectList(“selectByPriceRange”,para);<br>            for(Goods g:list){<br>                System.out.println(g.getTitle()+g.getCurrentPrice());<br>            }<br>        } catch (Exception e) {<br>            throw e;<br>        } finally {<br>            MyBatisUtils.closeSession(sqlSession);<br>        }<br>    }</p>
+<pre><code>@Test
+public void testSelectGoodsMap() throws Exception &#123;
+    SqlSession sqlSession = null;
+    try &#123;
+        sqlSession = MyBatisUtils.openSession();
+        List&lt;Map&gt; list = sqlSession.selectList(&quot;goods.selectGoodsMap&quot;);
+        for(Map map:list) &#123;
+            System.out.println(map);
+        &#125;
+    &#125; catch (Exception e) &#123;
+        throw e;
+    &#125; finally &#123;
+        MyBatisUtils.closeSession(sqlSession);
+    &#125;
+&#125;
+@Test
+public void testSelectGoodsDTO() throws Exception &#123;
+    SqlSession sqlSession = null;
+    try &#123;
+        sqlSession = MyBatisUtils.openSession();
+        List&lt;GoodsDTO&gt; list = sqlSession.selectList(&quot;goods.selectGoodsDTO&quot;);
+        for(GoodsDTO goodsDTO:list) &#123;
+            System.out.println(goodsDTO.getGoods().getTitle());
+        &#125;
+    &#125; catch (Exception e) &#123;
+        throw e;
+    &#125; finally &#123;
+        MyBatisUtils.closeSession(sqlSession);
+    &#125;
+&#125;
+@Test
+public void testInsert() throws Exception &#123;
+    SqlSession sqlSession = null;
+    try &#123;
+        sqlSession = MyBatisUtils.openSession();
+        Goods goods = new Goods();
+        goods.setTitle(&quot;测试商品&quot;);
+        goods.setSubTitle(&quot;测试子标题&quot;);
+        goods.setOriginalCost(200f);
+        goods.setCurrentPrice(100f);
+        goods.setDiscount(0.5f);
+        goods.setIsFreeDelivery(1);
+        goods.setCategoryId(43);
+        //返回值代表成功完成插入的总数
+        int num = sqlSession.insert(&quot;goods.insert&quot;,goods);
+        System.out.println(num);
+        sqlSession.commit();
+        System.out.println(goods.getGoodsId());
+    &#125; catch (Exception e) &#123;
+        if(sqlSession!=null)
+            sqlSession.rollback();
+        throw e;
+    &#125; finally &#123;
+        MyBatisUtils.closeSession(sqlSession);
+    &#125;
+&#125;
+
+@Test
+public void testUpdate() throws Exception &#123;
+    SqlSession sqlSession = null;
+    try &#123;
+        sqlSession = MyBatisUtils.openSession();
+        Goods goods = sqlSession.selectOne(&quot;goods.selectById&quot;,2678);
+        System.out.println(goods.getGoodsId());
+        goods.setTitle(&quot;更新的测试&quot;);
+        int num = sqlSession.update(&quot;goods.update&quot;,goods);
+        sqlSession.commit();
+    &#125; catch (Exception e) &#123;
+        if(sqlSession!=null) &#123;
+            sqlSession.rollback();
+        &#125;
+        throw e;
+    &#125; finally &#123;
+        MyBatisUtils.closeSession(sqlSession);
+    &#125;
+&#125;
+
+@Test
+public void testDelete() throws Exception &#123;
+    SqlSession sqlSession = null;
+    try &#123;
+        sqlSession = MyBatisUtils.openSession();
+        Goods goods = sqlSession.selectOne(&quot;goods.selectById&quot;,2678);
+        System.out.println(goods.getGoodsId());
+        int num = sqlSession.delete(&quot;goods.delete&quot;,goods.getGoodsId());
+        sqlSession.commit();
+    &#125; catch (Exception e) &#123;
+        if(sqlSession!=null) &#123;
+            sqlSession.rollback();
+        &#125;
+        throw e;
+    &#125; finally &#123;
+        MyBatisUtils.closeSession(sqlSession);
+    &#125;
+&#125;
+</code></pre>
+<p>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/21/MyBatis/" data-id="cl11so3bs000044ug4ck0cl8u" data-title="MyBatis" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Lambda" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/03/19/Lambda/" class="article-date">
@@ -262,7 +664,7 @@ public void case3()&#123;
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>#反射<br>1.什么是反射？<br>反射是在运行时动态访问类与对象的技术<br>在JDK1.2版本之后的高级技术，隶属于java.lang.reflect<br>大多数java框架都基于反射实现参数配置，动态注入等特性<br>2.反射的四个核心类<br>Class类<br>    在JVM中代表类和接口的类<br>    Class对象包含了某个特定类的结构信息<br>    通过Class对象可以获得对应类的构造方法&#x2F;方法&#x2F;成员变量<br>    核心方法：（classObj代表某个具体的Class对象）<br>        Class.forName()静态方法，获取指定党的Class对象<br>        classObj.newinstance()通过默认的构造方法创建新的对象<br>        classObj.getConstructor()获得指定的由public修饰的（默认）构造方法Constructor对象,返回Object类<br>        classObj.getMethod()获得指定的由public修饰的构造方法Method对象<br>        classObj.getField()获得指定的由public修饰的构造方法Field对象<br>         try {<br>            &#x2F;&#x2F;该方法将指定的类加载到jvm，并返回对应Class对象<br>            Class employeeClass &#x3D; Class.forName(“com.imooc.reflect.entity.Employee”);<br>            System.out.println(“Employee已被加载到JVM中”);<br>            &#x2F;&#x2F;通过默认的构造方法创建新的对象<br>            Employee emp &#x3D; (Employee)employeeClass.newInstance();<br>            System.out.println(emp);<br>        } catch (ClassNotFoundException e) {<br>            &#x2F;&#x2F;类名或路径书写错误，抛出“类无法找到”异常<br>            e.printStackTrace();<br>        } catch (IllegalAccessException e) {<br>            &#x2F;&#x2F;非法访问异常，如private，当在作用域外访问对象方法或成员变量时抛出<br>            e.printStackTrace();<br>        } catch (InstantiationException e) {<br>            &#x2F;&#x2F;实例化异常，当对象无法被实例化时抛出<br>            e.printStackTrace();<br>        }<br>Constructor构造方法类<br>    是对java类中构造方法的抽象<br>    包含了具体类的某个具体构造方法的声明<br>    通过Constructor对象调用带参构造方法创建对象<br>    核心方法：<br>        classObj.getConstrustor()获取指定public修饰的构造方法对象<br>        constructorObj.newInstance()通过对应的构造方法创建对象<br>        try {<br>            Class employeeClass &#x3D; Class.forName(“com.imooc.reflect.entity.Employee”);<br>            Constructor constructor &#x3D; employeeClass.getConstructor(new Class[]{<br>                    Integer.class,String.class,Float.class,String.class<br>            });<br>            Employee employee &#x3D; (Employee)constructor.newInstance(new Object[]{<br>                    100,”李磊”,300f,”研发部”<br>            });<br>            System.out.println(employee);<br>        } catch (ClassNotFoundException e) {<br>            e.printStackTrace();<br>        } catch (NoSuchMethodException e) {<br>            &#x2F;&#x2F;没有找到与之对应格式的方法<br>            e.printStackTrace();<br>        } catch (IllegalAccessException e) {<br>            e.printStackTrace();<br>        } catch (InstantiationException e) {<br>            e.printStackTrace();<br>        } catch (InvocationTargetException e) {<br>            &#x2F;&#x2F;当调用的方法内部出现异常而没有被捕捉到时抛出<br>            e.printStackTrace();<br>        }<br>Method方法类<br>    指代某个类中的方法的描述<br>    使用classobj.getMethod()方法获取Method对象<br>    通过Method对象调用指定对象的对应方法<br>    核心方法：<br>        ClassObj.getMethod()获取指定public修饰党的方法对象<br>        methodObj.invoke()调用指定对象的对应方法<br>        try {<br>            Class employeeClass &#x3D; Class.forName(“com.imooc.reflect.entity.Employee”);<br>            Constructor constructor &#x3D; employeeClass.getConstructor(new Class[]{<br>                    Integer.class,String.class,Float.class,String.class<br>            });<br>            Employee employee &#x3D; (Employee)constructor.newInstance(new Object[]{<br>                    100,”李磊”,300f,”研发部”<br>            });<br>            Method updateSalaryMethod &#x3D; employeeClass.getMethod(“updateSalary”, new Class[]{<br>                    Float.class<br>            });<br>            Employee employee1 &#x3D; (Employee)updateSalaryMethod.invoke(employee,new Object[]{<br>                    1000f<br>            });<br>            System.out.println(employee1);<br>        } catch (ClassNotFoundException e) {<br>            e.printStackTrace();<br>        } catch (NoSuchMethodException e) {<br>            e.printStackTrace();<br>        } catch (IllegalAccessException e) {<br>            e.printStackTrace();<br>        } catch (InstantiationException e) {<br>            e.printStackTrace();<br>        } catch (InvocationTargetException e) {<br>            e.printStackTrace();<br>        }<br>Field成员变量类<br>    Field对应某个具体类中的成员变量的声明<br>    Field对象使用classObj.getField()方法获取<br>    通过Field对象可为某对象成员变量赋值&#x2F;取值<br>    核心方法：<br>        classObj.getField()获取指定public修饰的成员变量对象<br>        fieldObj.set()为某个指定成员变量赋值<br>        fieldObj.get()获取某对象指定成员变量数值<br>        try {<br>            Class employeeClass &#x3D; Class.forName(“com.imooc.reflect.entity.Employee”);<br>            Constructor constructor &#x3D; employeeClass.getConstructor(new Class[]{<br>                    Integer.class,String.class,Float.class,String.class<br>            });<br>            Employee employee &#x3D; (Employee)constructor.newInstance(new Object[]{<br>                    100,”李磊”,300f,”研发部”<br>            });<br>            Field field &#x3D; employeeClass.getField(“ename”);<br>            field.set(employee,”李雷”);<br>            String s &#x3D; (String)field.get(employee);<br>            System.out.println(“ename “+s);<br>        } catch (ClassNotFoundException e) {<br>            e.printStackTrace();<br>        } catch (NoSuchMethodException e) {<br>            e.printStackTrace();<br>        } catch (InstantiationException e) {<br>            e.printStackTrace();<br>        } catch (IllegalAccessException e) {<br>            e.printStackTrace();<br>        } catch (InvocationTargetException e) {<br>            e.printStackTrace();<br>        } catch (NoSuchFieldException e) {<br>            e.printStackTrace();<br>        }<br>    getDeclared系列方法：<br>        getDeclaredConstructor(s)|Method(s)|Field(s)获取对应对象<br>        而getConstructor(s)|Method(s)|Field(s)只能获取public对象<br>        当访问非作用域内的构造方法，方法，成员变量时，会抛出异常<br>        try {<br>            Class employeeClass &#x3D; Class.forName(“com.imooc.reflect.entity.Employee”);<br>            Constructor constructor &#x3D; employeeClass.getConstructor(new Class[]{<br>                    Integer.class,String.class,Float.class,String.class<br>            });<br>            Employee employee &#x3D; (Employee)constructor.newInstance(new Object[]{<br>                    100,”李磊”,300f,”研发部”<br>            });<br>            Field[] fields &#x3D; employeeClass.getDeclaredFields();<br>            for(Field field:fields){<br>                System.out.println(field.getName());<br>                if(field.getModifiers() &#x3D;&#x3D; 1){&#x2F;&#x2F;public修饰<br>                    Object val &#x3D;field.get(employee);<br>                    System.out.println(field.getName()+”:”+val);<br>                }else if(field.getModifiers() &#x3D;&#x3D; 2){&#x2F;&#x2F;private修饰<br>                    String methodName &#x3D; “get”+field.getName().substring(0,1).toUpperCase()<br>                            +field.getName().substring(1);<br>                    Method getMethod &#x3D; employeeClass.getMethod((methodName));<br>                    Object obj &#x3D; getMethod.invoke(employee);<br>                    System.out.println(field.getName()+”:”+obj);<br>                }<br>            }<br>        } catch (ClassNotFoundException e) {<br>            e.printStackTrace();<br>        } catch (NoSuchMethodException e) {<br>            e.printStackTrace();<br>        } catch (InstantiationException e) {<br>            e.printStackTrace();<br>        } catch (IllegalAccessException e) {<br>            e.printStackTrace();<br>        } catch (InvocationTargetException e) {<br>            e.printStackTrace();<br>        }<br>反射的应用<br>I18N国际化<br>执行类<br>public static void say(){<br>        Properties properties &#x3D; new Properties();<br>        String  configPath &#x3D; Application.class.getResource(“&#x2F;config.properties”).getPath();<br>        try {<br>            configPath &#x3D; new URLDecoder().decode(configPath,”UTF-8”);<br>            properties.load(new FileInputStream(configPath));<br>            String language &#x3D; properties.getProperty(“language”);<br>            I18N i18N &#x3D; (I18N)Class.forName(language).newInstance();<br>            System.out.println(<br>                    i18N.say()<br>            );<br>        } catch (Exception e) {<br>            e.printStackTrace();<br>        }<br>}</p>
+        <p>#反射<br>1.什么是反射？<br>反射是在运行时动态访问类与对象的技术<br>在JDK1.2版本之后的高级技术，隶属于java.lang.reflect<br>大多数java框架都基于反射实现参数配置，动态注入等特性<br>2.反射的四个核心类<br>Class类<br>    在JVM中代表类和接口的类<br>    Class对象包含了某个特定类的结构信息<br>    通过Class对象可以获得对应类的构造方法&#x2F;方法&#x2F;成员变量<br>    核心方法：（classObj代表某个具体的Class对象）<br>        Class.forName()静态方法，获取指定党的Class对象<br>        classObj.newinstance()通过默认的构造方法创建新的对象<br>        classObj.getConstructor()获得指定的由public修饰的（默认）构造方法Constructor对象,返回Object类<br>        classObj.getMethod()获得指定的由public修饰的构造方法Method对象<br>        classObj.getField()获得指定的由public修饰的构造方法Field对象<br>        try {<br>            &#x2F;&#x2F;该方法将指定的类加载到jvm，并返回对应Class对象<br>            Class employeeClass &#x3D; Class.forName(“com.imooc.reflect.entity.Employee”);<br>            System.out.println(“Employee已被加载到JVM中”);<br>            &#x2F;&#x2F;通过默认的构造方法创建新的对象<br>            Employee emp &#x3D; (Employee)employeeClass.newInstance();<br>            System.out.println(emp);<br>        } catch (ClassNotFoundException e) {<br>            &#x2F;&#x2F;类名或路径书写错误，抛出“类无法找到”异常<br>            e.printStackTrace();<br>        } catch (IllegalAccessException e) {<br>            &#x2F;&#x2F;非法访问异常，如private，当在作用域外访问对象方法或成员变量时抛出<br>            e.printStackTrace();<br>        } catch (InstantiationException e) {<br>            &#x2F;&#x2F;实例化异常，当对象无法被实例化时抛出<br>            e.printStackTrace();<br>        }<br>Constructor构造方法类<br>    是对java类中构造方法的抽象<br>    包含了具体类的某个具体构造方法的声明<br>    通过Constructor对象调用带参构造方法创建对象<br>    核心方法：<br>        classObj.getConstrustor()获取指定public修饰的构造方法对象<br>        constructorObj.newInstance()通过对应的构造方法创建对象<br>        try {<br>            Class employeeClass &#x3D; Class.forName(“com.imooc.reflect.entity.Employee”);<br>            Constructor constructor &#x3D; employeeClass.getConstructor(new Class[]{<br>                    Integer.class,String.class,Float.class,String.class<br>            });<br>            Employee employee &#x3D; (Employee)constructor.newInstance(new Object[]{<br>                    100,”李磊”,300f,”研发部”<br>            });<br>            System.out.println(employee);<br>        } catch (ClassNotFoundException e) {<br>            e.printStackTrace();<br>        } catch (NoSuchMethodException e) {<br>            &#x2F;&#x2F;没有找到与之对应格式的方法<br>            e.printStackTrace();<br>        } catch (IllegalAccessException e) {<br>            e.printStackTrace();<br>        } catch (InstantiationException e) {<br>            e.printStackTrace();<br>        } catch (InvocationTargetException e) {<br>            &#x2F;&#x2F;当调用的方法内部出现异常而没有被捕捉到时抛出<br>            e.printStackTrace();<br>        }<br>Method方法类<br>    指代某个类中的方法的描述<br>    使用classobj.getMethod()方法获取Method对象<br>    通过Method对象调用指定对象的对应方法<br>    核心方法：<br>        ClassObj.getMethod()获取指定public修饰党的方法对象<br>        methodObj.invoke()调用指定对象的对应方法<br>        try {<br>            Class employeeClass &#x3D; Class.forName(“com.imooc.reflect.entity.Employee”);<br>            Constructor constructor &#x3D; employeeClass.getConstructor(new Class[]{<br>                    Integer.class,String.class,Float.class,String.class<br>            });<br>            Employee employee &#x3D; (Employee)constructor.newInstance(new Object[]{<br>                    100,”李磊”,300f,”研发部”<br>            });<br>            Method updateSalaryMethod &#x3D; employeeClass.getMethod(“updateSalary”, new Class[]{<br>                    Float.class<br>            });<br>            Employee employee1 &#x3D; (Employee)updateSalaryMethod.invoke(employee,new Object[]{<br>                    1000f<br>            });<br>            System.out.println(employee1);<br>        } catch (ClassNotFoundException e) {<br>            e.printStackTrace();<br>        } catch (NoSuchMethodException e) {<br>            e.printStackTrace();<br>        } catch (IllegalAccessException e) {<br>            e.printStackTrace();<br>        } catch (InstantiationException e) {<br>            e.printStackTrace();<br>        } catch (InvocationTargetException e) {<br>            e.printStackTrace();<br>        }<br>Field成员变量类<br>    Field对应某个具体类中的成员变量的声明<br>    Field对象使用classObj.getField()方法获取<br>    通过Field对象可为某对象成员变量赋值&#x2F;取值<br>    核心方法：<br>        classObj.getField()获取指定public修饰的成员变量对象<br>        fieldObj.set()为某个指定成员变量赋值<br>        fieldObj.get()获取某对象指定成员变量数值<br>        try {<br>            Class employeeClass &#x3D; Class.forName(“com.imooc.reflect.entity.Employee”);<br>            Constructor constructor &#x3D; employeeClass.getConstructor(new Class[]{<br>                    Integer.class,String.class,Float.class,String.class<br>            });<br>            Employee employee &#x3D; (Employee)constructor.newInstance(new Object[]{<br>                    100,”李磊”,300f,”研发部”<br>            });<br>            Field field &#x3D; employeeClass.getField(“ename”);<br>            field.set(employee,”李雷”);<br>            String s &#x3D; (String)field.get(employee);<br>            System.out.println(“ename “+s);<br>        } catch (ClassNotFoundException e) {<br>            e.printStackTrace();<br>        } catch (NoSuchMethodException e) {<br>            e.printStackTrace();<br>        } catch (InstantiationException e) {<br>            e.printStackTrace();<br>        } catch (IllegalAccessException e) {<br>            e.printStackTrace();<br>        } catch (InvocationTargetException e) {<br>            e.printStackTrace();<br>        } catch (NoSuchFieldException e) {<br>            e.printStackTrace();<br>        }<br>    getDeclared系列方法：<br>        getDeclaredConstructor(s)|Method(s)|Field(s)获取对应对象<br>        而getConstructor(s)|Method(s)|Field(s)只能获取public对象<br>        当访问非作用域内的构造方法，方法，成员变量时，会抛出异常<br>        try {<br>            Class employeeClass &#x3D; Class.forName(“com.imooc.reflect.entity.Employee”);<br>            Constructor constructor &#x3D; employeeClass.getConstructor(new Class[]{<br>                    Integer.class,String.class,Float.class,String.class<br>            });<br>            Employee employee &#x3D; (Employee)constructor.newInstance(new Object[]{<br>                    100,”李磊”,300f,”研发部”<br>            });<br>            Field[] fields &#x3D; employeeClass.getDeclaredFields();<br>            for(Field field:fields){<br>                System.out.println(field.getName());<br>                if(field.getModifiers() &#x3D;&#x3D; 1){&#x2F;&#x2F;public修饰<br>                    Object val &#x3D;field.get(employee);<br>                    System.out.println(field.getName()+”:”+val);<br>                }else if(field.getModifiers() &#x3D;&#x3D; 2){&#x2F;&#x2F;private修饰<br>                    String methodName &#x3D; “get”+field.getName().substring(0,1).toUpperCase()<br>                            +field.getName().substring(1);<br>                    Method getMethod &#x3D; employeeClass.getMethod((methodName));<br>                    Object obj &#x3D; getMethod.invoke(employee);<br>                    System.out.println(field.getName()+”:”+obj);<br>                }<br>            }<br>        } catch (ClassNotFoundException e) {<br>            e.printStackTrace();<br>        } catch (NoSuchMethodException e) {<br>            e.printStackTrace();<br>        } catch (InstantiationException e) {<br>            e.printStackTrace();<br>        } catch (IllegalAccessException e) {<br>            e.printStackTrace();<br>        } catch (InvocationTargetException e) {<br>            e.printStackTrace();<br>        }<br>反射的应用<br>I18N国际化<br>执行类<br>public static void say(){<br>        Properties properties &#x3D; new Properties();<br>        String  configPath &#x3D; Application.class.getResource(“&#x2F;config.properties”).getPath();<br>        try {<br>            configPath &#x3D; new URLDecoder().decode(configPath,”UTF-8”);<br>            properties.load(new FileInputStream(configPath));<br>            String language &#x3D; properties.getProperty(“language”);<br>            I18N i18N &#x3D; (I18N)Class.forName(language).newInstance();<br>            System.out.println(<br>                    i18N.say()<br>            );<br>        } catch (Exception e) {<br>            e.printStackTrace();<br>        }<br>}</p>
 <p>public static void main(String[] args) {<br>        Application.say();<br>}<br>配置文件：<br>language&#x3D;com.imooc.reflect.i18n.En<br>接口：<br>public interface I18N {<br>    public String say();<br>}<br>之后通过几个语言类Zhcn，En等实现接口即可<br>Zhcn类<br>public class Zhcn implements I18N{<br>    @Override<br>    public String say() {<br>        return “生命不息奋斗不止”;<br>    }<br>}<br>En类<br>public class En implements I18N{<br>    @Override<br>    public String say() {<br>        return “adasdjakdasdak”;<br>    }<br>}</p>
 
       
@@ -390,7 +792,7 @@ public void case3()&#123;
       
         <p>#毕业所要翻译的论文：<br>原文题目：Virtual Reality Robot-Assisted Welding Based<br>on Human Intention Recognition<br>翻译题目：基于人类意图识别的虚拟现实机器人辅助焊接</p>
 <p>安装了定制钨极气体保护焊(GTAW)焊炬的6自由度工业机器人UR-5作为焊接工作的最终执行者;<br>重点是识别机器人应该执行的命令人的意图，将人手的移动情况作为主要收集的数据；<br>使用分层架构的信息物理系统CPS来增强焊接操作，便于机器人由其操作人员的指挥<br>使用虚拟现实技术创建远程操作环境以防止环境对人产生的危害<br>使用Baum-Welch算法训练隐马尔可夫模型HMM，贝叶斯信息准则BIC用于确定隐藏状态的数量；<br>使用正向算法估计状态占据概率分布；<br>本文目标：<br>人机协作，让机器人能够更好的识别人的意图，按照人的思维进行操作，同时对人的无意义的错误操作进行纠正，使机器人具有一定程度上的自主性；<br>在焊接过程中，机器人的作用主要是进行危害性大，重复性的工作，保护人类工作者免受伤害，同时纠正少部分由于人类工作者技术生疏或意外导致的明显的错误；<br>人类工作者的作用主要是针对机器人难以理解，但操作者易于理解的部分，对机器人进行实时的调整，以实时适应复杂的焊接过程。<br>将需要密集劳动的部分交给机器人，实时适应的部分交给人类工作者，应当可以极大改善工作环境，提高工作效率。</p>
-<p>词语解释：<br>蒙特卡罗方法：使用随机数解决问题，相对的是确定性算法<br>隐马尔可夫模型：马尔可夫链的一种，它的状态不能直接观察到，但能通过观测向量序列观察到，每个观测向量都是通过某些概率密度分布表现为各种状态，每一个观测向量是由一个具有相应概率密度分布的状态序列产生。所以，隐马尔可夫模型是一个双重随机过程—-具有一定状态数的隐马尔可夫链和显示随机函数集<br>隐马尔可夫模型（HMM）可以用五个元素来描述，包括2个状态集合和3个概率矩阵</p>
+<p>词语解释：<br>蒙特卡罗方法：使用随机数解决问题，相对的是确定性算法<br>隐马尔可夫模型(HMM)：马尔可夫链的一种，它的状态不能直接观察到，但能通过观测向量序列观察到，每个观测向量都是通过某些概率密度分布表现为各种状态，每一个观测向量是由一个具有相应概率密度分布的状态序列产生。所以，隐马尔可夫模型是一个双重随机过程—-具有一定状态数的隐马尔可夫链和显示随机函数集<br>隐马尔可夫模型（HMM）可以用五个元素来描述，包括2个状态集合和3个概率矩阵</p>
 <ol>
 <li>隐含状态 S<br>这些状态之间满足马尔可夫性质，是马尔可夫模型中实际所隐含的状态。这些状态通常无法通过直接观测而得到。（例如S1、S2、S3等等)</li>
 <li>可观测状态 O<br>在模型中与隐含状态相关联，可通过直接观测而得到。(例如O1、O2、O3等等，可观测状态的数目不一定要和隐含状态的数目一致。）</li>
@@ -595,6 +997,14 @@ public void case3()&#123;
       <ul>
         
           <li>
+            <a href="/2022/03/21/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%8EJUnit4/">单元测试与JUnit4</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/21/MyBatis/">MyBatis</a>
+          </li>
+        
+          <li>
             <a href="/2022/03/19/Lambda/">Lambda</a>
           </li>
         
@@ -604,14 +1014,6 @@ public void case3()&#123;
         
           <li>
             <a href="/2022/03/17/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">工厂模式</a>
-          </li>
-        
-          <li>
-            <a href="/2022/03/16/Maven/">Maven</a>
-          </li>
-        
-          <li>
-            <a href="/2022/03/16/%E5%9F%BA%E4%BA%8E%E4%BA%BA%E7%B1%BB%E6%84%8F%E5%9B%BE%E8%AF%86%E5%88%AB%E7%9A%84%E8%99%9A%E6%8B%9F%E7%8E%B0%E5%AE%9E%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BE%85%E5%8A%A9%E7%84%8A%E6%8E%A5/">基于人类意图识别的虚拟现实机器人辅助焊接</a>
           </li>
         
       </ul>
