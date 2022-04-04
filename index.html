@@ -71,6 +71,272 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-html" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/03/html/" class="article-date">
+  <time class="dt-published" datetime="2022-04-03T00:54:41.000Z" itemprop="datePublished">2022-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/03/html/">html</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>HTML：<br>    1.标记又被称为标签<br>    2.xml的标签是自定义的<br>    3.html的标签是内置的<br>HTML骨架标签：<br>    html：根标签，除DOCTYPE外的其它内容都要卸载html标签内。<br>    head：页面头部，页面中非常重要但是又不会显示出来的代码写在此处，如css，js<br>    title：页面标题，显示在浏览器的标题栏<br>    body：页面主题，需要显示在浏览器的内容都写在此处<br>    注：html是一种松散的组织结构<br>        标签结构不正确或没有写在规定位置也能显示出来<br>        在编写时要按照要求来<br>HTML常用标签：<br>1.排版标签：<br>    标题标签：h1~h6，h1最大，独占一行<br>        属性包括：align设置内容的位置，包括left，central，right<br>    水平线和换行：hr标签是水平线，br换行<br>    段落标签：p标签，也有align属性，独占一行<br>    html实体：&amp;nbsp；相当于一个空格&amp;emsp；全角空格，&amp;lt；相当于&lt;<br>    div标签：网页布局，与css配合使用，目前一行只能放一个<br>    span标签：将文本独立，可独立设置样式<br>    字符格式化标签：b&#x2F;strong标签加粗，i&#x2F;em斜体，u&#x2F;ins标签下划线，del&#x2F;s标签删除线<br>    图片标签：img标签引入图片，src属性设置路径，alt属性设置在出错情况下的显示字符串，width&#x2F;height标签设置宽高<br>    链接标签：a标签包括超链接和锚链接，使用属性href指定跳转的页面&#x2F;锚“#。。。”，在其它标签内使用id表示锚点，使用target指定链接的打开方式，_blank表示在新窗口 打开，_self表示当前页面（默认）<br>2.表格<br>    table制作表格边框<br>    嵌套tr表示行，td表示列<br>    属性：border设置边框像素，width&#x2F;height表示表格宽高，cellspacing设置单元格之间，单元格与边框的间隙，cellpadding设置单元格内容与单元格的间隙，align设置表格在页面中的位置，bgcolor设置背景颜色，可以用单词或十六进制表示<br>    表格合并：使用colspan属性实现列合并，rowspan实现行合并<br>    其余标签：caption表格标题，thead头部标签，tbody表格主体，tfoot表格脚部<br>3.列表：<br>    有序列表：ol和li标签<br>    无序列表：ul和li标签<br>    自定义列表：dl，dt，dd三种标签<br>4.表单：<br>    form表单外层，method属性指定表单提交方式，action属性指定表单提交位置<br>    文本框：input type&#x3D;”text”,密码框 input type&#x3D;”password”<br>    常用属性：name起名，value为表单域的值，placeholder设置框中默认值，maxlength设置最大长度，readonly只读，disabled禁用<br>    单选框input标签内type属性设置为radio，同时设置相同的name，复选框type设置为checkbox，name名称需要加上[]<br>    文件域type属性设置为file，multiple属性设置允许同时选中多个文件，type属性设置为button为普通按钮，reset为重置表单，submit为表单提交。<br>    tyoe设置为hidden为隐藏域。<br>    下拉菜单：select与option标签嵌套<br>    文本域：使用textarea标签，cols和rows设置列数与行数</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/03/html/" data-id="cl1kuespk0001ycugf8ge3vab" data-title="html" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-PYQT5" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/31/PYQT5/" class="article-date">
+  <time class="dt-published" datetime="2022-03-31T02:39:08.000Z" itemprop="datePublished">2022-03-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/03/31/PYQT5/">PYQT5</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1.毕设简介<br>制作一个可执行的数据库文件，可以保存大量的焊接数据，点击放置在桌面的快捷方式能够进入一个弹出的窗体，在该窗体及之后的几个窗体上实现对焊接数据的增删改查操作。<br>实现要点：<br>    1.登陆界面：该界面实现对用户的识别操作，预计设计两个不同的操作权限，较高权限的用户可以对数据进行增删改查操作，而权限较低的用户只可以对数据进行查询操作。由于将整个文件打包封装，因此设计者可以直接打开源代码进行相应的修改功能，而无需进入登陆界面。<br>    我通过在数据库内增加一个用户表，登陆时需要查找该用户表，在用户表内存在相应的用户数据就可以登陆。<br>    2.主页面：该页面实现对数据操作的封装，相当于一个目录，在该页面上可以选择需要进行的操作，之后在弹出的界面中进行相应的操作<br>    3.各操作页面，实现对数据的各种相关操作。<br>2.语言选择<br>    1.mfc 使用c++编写的框架，需要对c++有一定了解，技术比较过时。<br>    2.fx和swing 为java框架，本人对Java语言较为熟悉，但是Java对于可视化界面的操作不太流行，相关资料较少，技术发展缓慢。<br>    3.vb 为微软提供的操作语言，可以直接实现可视化编程，相当于一个直接操作的界面，需要重新学习vb语言规则，而且我不想学。<br>    4.pyqt5和pyside2 qt语言是以c++编写的可视化图形界面编程的一个模块，在各种语言里都被引用，在python中被称为pyqt，导入该模块，即可使用相应的函数实现相应图形的绘制。pyqt5和pyside2相当于一个是民间组织而一个是官方支持，内容几乎相同，学习时可以不分彼此，而且在pyqt里内置了qt designer插件，也可以实现以图形的方式实现编程，可以将绘制好的图形转换为相应的python代码，而程序猿只需要对其进行相应的修改，增加需要实现的功能，而图形绘制的繁琐操作就可以忽略。<br>3.目前进展<br>    已经设计好登陆页面的全部功能，初步设计出一个主页面，但只实现了查询用户的功能，用户维护页面仅实现了基本的显示功能，尚未与数据库进行连接。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/31/PYQT5/" data-id="cl1kuespe0000ycuggvku48fy" data-title="PYQT5" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-mybatis2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/23/mybatis2/" class="article-date">
+  <time class="dt-published" datetime="2022-03-23T03:45:01.000Z" itemprop="datePublished">2022-03-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/03/23/mybatis2/">mybatis2</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1.什么是日志<br>日志文件是用于记录系统操着事件的记录文件或文件集合<br>日志保存历史数据，是诊断问题以及理解系统活动的重要依据<br>2.SLF4j与Logback<br>日志门面与日志实现<br>在pom.xml文件里dependency标签引入</p>
+<pre><code>    &lt;dependency&gt;
+        &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+        &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+        &lt;version&gt;1.2.3&lt;/version&gt;
+    &lt;/dependency&gt;
+</code></pre>
+<p>引入之后在运行过程中就会输出相应细节部分（反正你也看不懂）<br>自定义logback配置项：<br>resources目录下新建logback.xml文件（名字不可以改）</p>
+<configuration>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">/设置显示消息的位置
+        <encoder>/格式设置
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!--日志级别优先级从高到低
+    error：错误-系统故障日志
+    warn：警告-存在风险或使用不当的日志
+    info：一般性消息
+    debug：程序内部用于调试信息
+    trace：程序运行的跟踪信息
+    -->
+    <root level="debug">/设置显示的最低消息级别
+        <appender-ref ref="console"></appender-ref>
+    </root>
+</configuration>
+
+<p>3.MyBatis动态sql<br>动态sql是指根据参数数据动态组织sql的技术</p>
+<select id="dynamicSQL" parameterType="java.util.Map" resultType="com.imooc.mybatis.entity.Goods">
+        select * from t_goods
+        <!--使用where子标签可以不用1=1-->
+        where
+         1=1
+         <if test="categoryId !=null">
+             and category_id = #{categoryId}
+         </if>
+         <if test="currentPrice != null">
+            and current_price &lt; #{currentPrice}
+         </if>
+</select>
+
+<p>4.MyBatis二级缓存技术<br>一级缓存默认开启，缓存范围SqlSession会话<br>二级缓存手动开启，属于范围Mapper Namespace<br>二级缓存的运行规则：<br>二级缓存开启后默认所有查询操作均使用缓存<br>写操作commit提交时对该namespace缓存强制清空<br>配置useCache&#x3D;false可以不用缓存<br>配置flushCache&#x3D;true代表强制清空缓存</p>
+<!--    开启二级缓存-->
+<pre><code>&lt;cache eviction=&quot;LRU&quot; flushInterval=&quot;600000&quot; size=&quot;512&quot; readOnly=&quot;true&quot;/&gt;
+</code></pre>
+<!--    eviction是缓存策略
+            1.LRU最近最久未使用 2.FIFO 3.SOFT软引用 4.WEAK弱引用 3和4交给jvm垃圾处理器处理，不推荐
+        flushInterval代表间隔多长时间自动清空缓存，单位为毫秒
+        size代表缓存区长度，单位为对象
+        readOnly代表是否只读，为false时取出原始对象的副本，效率低但安全性较高
+            -->
+
+<p>5.MyBatis多表级联查询<br>通过一个对象获得与其相互有关的其它对象，通过多个sql语句实现<br>一对多：<br>在goods.xml内添加</p>
+<!--
+        resultMap可用于说明一对多或者多对一的映射逻辑
+        id 是resultMap属性引用的标志
+        type 指向One的实体(Goods)
+    -->
+<pre><code>&lt;resultMap id=&quot;rmGoods1&quot; type=&quot;com.imooc.mybatis.entity.Goods&quot;&gt;
+    &lt;!-- 映射goods对象的主键到goods_id字段 --&gt;
+    &lt;id column=&quot;goods_id&quot; property=&quot;goodsId&quot;&gt;&lt;/id&gt;
+    &lt;!--
+        collection的含义是,在
+        select * from t_goods limit 0,1 得到结果后,对所有Goods对象遍历得到goods_id字段值,
+        并代入到goodsDetail命名空间的findByGoodsId的SQL中执行查询,
+        将得到的&quot;商品详情&quot;集合赋值给goodsDetails List对象.
+    --&gt;
+    &lt;collection property=&quot;goodsDetails&quot; select=&quot;goodsDetail.selectByGoodsId&quot;
+                column=&quot;goods_id&quot;/&gt;
+&lt;/resultMap&gt;
+&lt;select id=&quot;selectOneToMany&quot; resultMap=&quot;rmGoods1&quot;&gt;
+    select * from t_goods limit 0,10
+&lt;/select&gt;
+</code></pre>
+<p>在goods_detai.xml内添加<br>    <select id="selectByGoodsId" parameterType="Integer"
+            resultType="com.imooc.mybatis.entity.GoodsDetail"><br>        select * from t_goods_detail where goods_id &#x3D; #{value}<br>    </select><br>    注意在config里的引用以及相关类的创建<br>多对一：</p>
+<p>6.分页插件PageHelper：<br>问题：  1.当前页数据查询-select * from tab limit 0,10<br>        2.总记录数查询-select count(*) from tab<br>        3.程序计算总页数，上一页页码，下一页页码<br>使用流程：<br>    1.maven引入PageHelper与jsqlparser<br>    pom中：</p>
+<dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>5.1.10</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.jsqlparser</groupId>
+            <artifactId>jsqlparser</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+<pre><code>2.mybatis-config.xml增加Plugin配置
+</code></pre>
+<plugin interceptor="com.github.pagehelper.PageInterceptor">
+<!--            设置数据库类型-->
+            <property name="helperDialect" value="mysql"/>
+<!--            分页合理化-->
+            <property name="reasonable" value="true"/>
+        </plugin>
+
+<pre><code>3.代码中使用PageHelper.startPage()自动分页
+</code></pre>
+<select id="selectPage" resultType="com.imooc.mybatis.entity.Goods">
+        select * from t_goods where current_price &lt; 1000
+    </select>
+    public void testSelect() throws Exception {
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = MyBatisUtils.openSession();
+            //对即将到来的下一次查询自动进行分页
+            PageHelper.startPage(2,10);
+            Page<Goods> page = (Page)sqlSession.selectList("goods.selectPage");
+            System.out.println("总页数："+page.getPages());
+            System.out.println("总记录数："+page.getTotal());
+            System.out.println("开始行号："+page.getStartRow());
+            System.out.println("结束行号："+page.getEndRow());
+            System.out.println("当前页码："+page.getPageNum());
+            List<Goods> list = page.getResult();//当前页数据
+            for(Goods g:list){
+                System.out.println(g.getTitle());
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+    }
+
+<pre><code>4.不同数据库分页的实现原理
+Oracle最麻烦，三层嵌套
+sql sqrver采用偏移的原理
+</code></pre>
+<p>7.MyBatis配置C3PO连接池<br>    1.pom中引入<br>    2.创建类<br>    3.配置文件更改POOLED为类的路径，相关属性也需要更改</p>
+<p>8.MyBatis批处理<br>   批量插入局限<br>1.无法获得插入数据的id<br>2.批量生成的sql太长，可能会被服务器拒绝。可以分次导入哎嘿</p>
+<select id="batchInsert" parameterType="java.util.List">
+        insert into t_goods (title, sub_title, original_cost, current_price, discount, is_free_delivery, category_id)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.title},#{item.subTitle},#{item.originalCost},#{item.currentPrice},#{item.discount},#{item.isFreeDelivery},#{item.categoryId})
+        </foreach>
+    </select>
+
+<pre><code>批量删除
+</code></pre>
+<delete id="batchDelete" parameterType="java.util.List">
+        delete from t_goods where goods_id in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+<pre><code>均使用foreach标签，list属性名必须为list
+</code></pre>
+<p>9.MyBatis常用注解(将xml文件里的内容放在注解里，更方便)<br>@Insert-&gt;<insert><br>@Update<br>@Delete<br>@Select<br>@Param 参数映射<br>@Results-&gt;<resultMap> 结果映射<br>@Result-&gt;<id><result> 字段映射</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/23/mybatis2/" data-id="cl1kuespn0002ycugc18odkmi" data-title="mybatis2" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-单元测试与JUnit4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/03/21/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%8EJUnit4/" class="article-date">
@@ -817,142 +1083,12 @@ public void case3()&#123;
 
 
   
-    <article id="post-第一次" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/03/14/%E7%AC%AC%E4%B8%80%E6%AC%A1/" class="article-date">
-  <time class="dt-published" datetime="2022-03-14T02:44:14.000Z" itemprop="datePublished">2022-03-14</time>
-</a>
+
+
+  <nav id="page-nav">
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/03/14/%E7%AC%AC%E4%B8%80%E6%AC%A1/">第一次</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>#这个hexo好难搞啊,写点配置过程中遇到的问题吧。<br>1.配置文件里面的配置文件：由于GitHub最近的更新，需要用main代替原来的master。<br>2.在连接github时报错，按照提示手动输入账户和密码，账户为GitHub的账户名，不能输错；密码是setting设置里面的连接。注意不要输入自己账户的密码。<br>3.hexo d,s,g等功能，hexo不能自己同步本地内容，需要手动hexo g，hexo d。</p>
-<p>等我啥时候有时间了捣鼓下换个好看的主题。<br>最近8斋出了一个时空接触者，被隔离了。。。<br>隔离好难啊，饭来得又慢又不好吃。</p>
-<p>以后日常学习完，晚上再把白天学习的内容记录一下，这个Blog就当是自己的学习笔记吧。<br>要是我能坚持记录的话</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/03/14/%E7%AC%AC%E4%B8%80%E6%AC%A1/" data-id="cl0q5apcg0000n8ug0vlpfd8k" data-title="第一次" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%AC%E4%B8%80%E6%AC%A1%E9%9A%8F%E4%BE%BF%E5%86%99%E7%82%B9%E4%B8%9C%E8%A5%BF/" rel="tag">第一次随便写点东西</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-第一次测试" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/03/14/%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95/" class="article-date">
-  <time class="dt-published" datetime="2022-03-14T01:32:10.000Z" itemprop="datePublished">2022-03-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/03/14/%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95/">第一次测试</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>#简介：<br>这是第一次测试<br>“”</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/03/14/%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95/" data-id="cl0q190qx0000zkugaojs648e" data-title="第一次测试" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95hexo%E5%86%99%E5%8D%9A%E5%AE%A2/" rel="tag">测试hexo写博客</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/03/13/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2022-03-13T03:20:42.863Z" itemprop="datePublished">2022-03-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/03/13/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/03/13/hello-world/" data-id="cl0opp2vh0000zsug5fjz73a1" data-title="Hello World" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
@@ -984,7 +1120,7 @@ public void case3()&#123;
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li></ul>
     </div>
   </div>
 
@@ -997,23 +1133,23 @@ public void case3()&#123;
       <ul>
         
           <li>
+            <a href="/2022/04/03/html/">html</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/31/PYQT5/">PYQT5</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/23/mybatis2/">mybatis2</a>
+          </li>
+        
+          <li>
             <a href="/2022/03/21/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%8EJUnit4/">单元测试与JUnit4</a>
           </li>
         
           <li>
             <a href="/2022/03/21/MyBatis/">MyBatis</a>
-          </li>
-        
-          <li>
-            <a href="/2022/03/19/Lambda/">Lambda</a>
-          </li>
-        
-          <li>
-            <a href="/2022/03/18/Java-Reflect/">Java-Reflect</a>
-          </li>
-        
-          <li>
-            <a href="/2022/03/17/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">工厂模式</a>
           </li>
         
       </ul>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>mybatis2 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1.什么是日志日志文件是用于记录系统操着事件的记录文件或文件集合日志保存历史数据，是诊断问题以及理解系统活动的重要依据2.SLF4j与Logback日志门面与日志实现在pom.xml文件里dependency标签引入     &lt;dependency&gt;         &lt;groupId&gt;ch.qos.logback&lt;&#x2F;groupId&gt;         &lt;ar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis2">
+<meta property="og:url" content="http://example.com/2022/03/23/mybatis2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.什么是日志日志文件是用于记录系统操着事件的记录文件或文件集合日志保存历史数据，是诊断问题以及理解系统活动的重要依据2.SLF4j与Logback日志门面与日志实现在pom.xml文件里dependency标签引入     &lt;dependency&gt;         &lt;groupId&gt;ch.qos.logback&lt;&#x2F;groupId&gt;         &lt;ar">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-23T03:45:01.000Z">
+<meta property="article:modified_time" content="2022-03-24T07:00:46.225Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-mybatis2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/23/mybatis2/" class="article-date">
+  <time class="dt-published" datetime="2022-03-23T03:45:01.000Z" itemprop="datePublished">2022-03-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      mybatis2
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1.什么是日志<br>日志文件是用于记录系统操着事件的记录文件或文件集合<br>日志保存历史数据，是诊断问题以及理解系统活动的重要依据<br>2.SLF4j与Logback<br>日志门面与日志实现<br>在pom.xml文件里dependency标签引入</p>
+<pre><code>    &lt;dependency&gt;
+        &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+        &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+        &lt;version&gt;1.2.3&lt;/version&gt;
+    &lt;/dependency&gt;
+</code></pre>
+<p>引入之后在运行过程中就会输出相应细节部分（反正你也看不懂）<br>自定义logback配置项：<br>resources目录下新建logback.xml文件（名字不可以改）</p>
+<configuration>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">/设置显示消息的位置
+        <encoder>/格式设置
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!--日志级别优先级从高到低
+    error：错误-系统故障日志
+    warn：警告-存在风险或使用不当的日志
+    info：一般性消息
+    debug：程序内部用于调试信息
+    trace：程序运行的跟踪信息
+    -->
+    <root level="debug">/设置显示的最低消息级别
+        <appender-ref ref="console"></appender-ref>
+    </root>
+</configuration>
+
+<p>3.MyBatis动态sql<br>动态sql是指根据参数数据动态组织sql的技术</p>
+<select id="dynamicSQL" parameterType="java.util.Map" resultType="com.imooc.mybatis.entity.Goods">
+        select * from t_goods
+        <!--使用where子标签可以不用1=1-->
+        where
+         1=1
+         <if test="categoryId !=null">
+             and category_id = #{categoryId}
+         </if>
+         <if test="currentPrice != null">
+            and current_price &lt; #{currentPrice}
+         </if>
+</select>
+
+<p>4.MyBatis二级缓存技术<br>一级缓存默认开启，缓存范围SqlSession会话<br>二级缓存手动开启，属于范围Mapper Namespace<br>二级缓存的运行规则：<br>二级缓存开启后默认所有查询操作均使用缓存<br>写操作commit提交时对该namespace缓存强制清空<br>配置useCache&#x3D;false可以不用缓存<br>配置flushCache&#x3D;true代表强制清空缓存</p>
+<!--    开启二级缓存-->
+<pre><code>&lt;cache eviction=&quot;LRU&quot; flushInterval=&quot;600000&quot; size=&quot;512&quot; readOnly=&quot;true&quot;/&gt;
+</code></pre>
+<!--    eviction是缓存策略
+            1.LRU最近最久未使用 2.FIFO 3.SOFT软引用 4.WEAK弱引用 3和4交给jvm垃圾处理器处理，不推荐
+        flushInterval代表间隔多长时间自动清空缓存，单位为毫秒
+        size代表缓存区长度，单位为对象
+        readOnly代表是否只读，为false时取出原始对象的副本，效率低但安全性较高
+            -->
+
+<p>5.MyBatis多表级联查询<br>通过一个对象获得与其相互有关的其它对象，通过多个sql语句实现<br>一对多：<br>在goods.xml内添加</p>
+<!--
+        resultMap可用于说明一对多或者多对一的映射逻辑
+        id 是resultMap属性引用的标志
+        type 指向One的实体(Goods)
+    -->
+<pre><code>&lt;resultMap id=&quot;rmGoods1&quot; type=&quot;com.imooc.mybatis.entity.Goods&quot;&gt;
+    &lt;!-- 映射goods对象的主键到goods_id字段 --&gt;
+    &lt;id column=&quot;goods_id&quot; property=&quot;goodsId&quot;&gt;&lt;/id&gt;
+    &lt;!--
+        collection的含义是,在
+        select * from t_goods limit 0,1 得到结果后,对所有Goods对象遍历得到goods_id字段值,
+        并代入到goodsDetail命名空间的findByGoodsId的SQL中执行查询,
+        将得到的&quot;商品详情&quot;集合赋值给goodsDetails List对象.
+    --&gt;
+    &lt;collection property=&quot;goodsDetails&quot; select=&quot;goodsDetail.selectByGoodsId&quot;
+                column=&quot;goods_id&quot;/&gt;
+&lt;/resultMap&gt;
+&lt;select id=&quot;selectOneToMany&quot; resultMap=&quot;rmGoods1&quot;&gt;
+    select * from t_goods limit 0,10
+&lt;/select&gt;
+</code></pre>
+<p>在goods_detai.xml内添加<br>    <select id="selectByGoodsId" parameterType="Integer"
+            resultType="com.imooc.mybatis.entity.GoodsDetail"><br>        select * from t_goods_detail where goods_id &#x3D; #{value}<br>    </select><br>    注意在config里的引用以及相关类的创建<br>多对一：</p>
+<p>6.分页插件PageHelper：<br>问题：  1.当前页数据查询-select * from tab limit 0,10<br>        2.总记录数查询-select count(*) from tab<br>        3.程序计算总页数，上一页页码，下一页页码<br>使用流程：<br>    1.maven引入PageHelper与jsqlparser<br>    pom中：</p>
+<dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>5.1.10</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.jsqlparser</groupId>
+            <artifactId>jsqlparser</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+<pre><code>2.mybatis-config.xml增加Plugin配置
+</code></pre>
+<plugin interceptor="com.github.pagehelper.PageInterceptor">
+<!--            设置数据库类型-->
+            <property name="helperDialect" value="mysql"/>
+<!--            分页合理化-->
+            <property name="reasonable" value="true"/>
+        </plugin>
+
+<pre><code>3.代码中使用PageHelper.startPage()自动分页
+</code></pre>
+<select id="selectPage" resultType="com.imooc.mybatis.entity.Goods">
+        select * from t_goods where current_price &lt; 1000
+    </select>
+    public void testSelect() throws Exception {
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = MyBatisUtils.openSession();
+            //对即将到来的下一次查询自动进行分页
+            PageHelper.startPage(2,10);
+            Page<Goods> page = (Page)sqlSession.selectList("goods.selectPage");
+            System.out.println("总页数："+page.getPages());
+            System.out.println("总记录数："+page.getTotal());
+            System.out.println("开始行号："+page.getStartRow());
+            System.out.println("结束行号："+page.getEndRow());
+            System.out.println("当前页码："+page.getPageNum());
+            List<Goods> list = page.getResult();//当前页数据
+            for(Goods g:list){
+                System.out.println(g.getTitle());
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+    }
+
+<pre><code>4.不同数据库分页的实现原理
+Oracle最麻烦，三层嵌套
+sql sqrver采用偏移的原理
+</code></pre>
+<p>7.MyBatis配置C3PO连接池<br>    1.pom中引入<br>    2.创建类<br>    3.配置文件更改POOLED为类的路径，相关属性也需要更改</p>
+<p>8.MyBatis批处理<br>   批量插入局限<br>1.无法获得插入数据的id<br>2.批量生成的sql太长，可能会被服务器拒绝。可以分次导入哎嘿</p>
+<select id="batchInsert" parameterType="java.util.List">
+        insert into t_goods (title, sub_title, original_cost, current_price, discount, is_free_delivery, category_id)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.title},#{item.subTitle},#{item.originalCost},#{item.currentPrice},#{item.discount},#{item.isFreeDelivery},#{item.categoryId})
+        </foreach>
+    </select>
+
+<pre><code>批量删除
+</code></pre>
+<delete id="batchDelete" parameterType="java.util.List">
+        delete from t_goods where goods_id in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+<pre><code>均使用foreach标签，list属性名必须为list
+</code></pre>
+<p>9.MyBatis常用注解(将xml文件里的内容放在注解里，更方便)<br>@Insert-&gt;<insert><br>@Update<br>@Delete<br>@Select<br>@Param 参数映射<br>@Results-&gt;<resultMap> 结果映射<br>@Result-&gt;<id><result> 字段映射</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/23/mybatis2/" data-id="cl1kuespn0002ycugc18odkmi" data-title="mybatis2" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/03/31/PYQT5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          PYQT5
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/03/21/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%8EJUnit4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">单元测试与JUnit4</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95hexo%E5%86%99%E5%8D%9A%E5%AE%A2/" rel="tag">测试hexo写博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%AC%E4%B8%80%E6%AC%A1%E9%9A%8F%E4%BE%BF%E5%86%99%E7%82%B9%E4%B8%9C%E8%A5%BF/" rel="tag">第一次随便写点东西</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%B5%8B%E8%AF%95hexo%E5%86%99%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">测试hexo写博客</a> <a href="/tags/%E7%AC%AC%E4%B8%80%E6%AC%A1%E9%9A%8F%E4%BE%BF%E5%86%99%E7%82%B9%E4%B8%9C%E8%A5%BF/" style="font-size: 10px;">第一次随便写点东西</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/03/html/">html</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/31/PYQT5/">PYQT5</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/23/mybatis2/">mybatis2</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/21/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%8EJUnit4/">单元测试与JUnit4</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/21/MyBatis/">MyBatis</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
